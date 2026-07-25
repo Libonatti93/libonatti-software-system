@@ -5,7 +5,7 @@ const description =
   "Engenharia de software para transformar ideias em produtos digitais rápidos, seguros e preparados para crescer.";
 
 export const metadata = {
-  metadataBase: new URL("https://matheus-libonatti.openai.site"),
+  metadataBase: new URL("https://matheus-libonatti.libonattimatheus.chatgpt.site"),
   title,
   description,
   keywords: [
@@ -42,7 +42,7 @@ export default function RootLayout({ children }) {
     "@type": "Person",
     name: "Matheus Libonatti",
     jobTitle: "Engenheiro de Software",
-    url: "https://matheus-libonatti.openai.site",
+    url: "https://matheus-libonatti.libonattimatheus.chatgpt.site",
     sameAs: ["https://github.com/Libonatti93"],
     knowsAbout: [
       "Engenharia de Software",
