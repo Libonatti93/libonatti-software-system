@@ -49,6 +49,8 @@ Cada versão possui uma URL própria. As páginas utilizam `hreflang` para ajuda
 - Conteúdo em português, espanhol LATAM e inglês.
 - Blog de tecnologia nos três idiomas.
 - Primeiro artigo editorial completo.
+- Catálogo comercial com cases localizados.
+- Case Nogueira Cardiologia: plataforma SaaS para saúde com CRM próprio.
 - Navegação acessível e menu adaptado para dispositivos móveis.
 - Rotas localizadas servidas por Nginx.
 - Deploy em contêiner Docker.
@@ -59,16 +61,21 @@ Cada versão possui uma URL própria. As páginas utilizam `hreflang` para ajuda
 ```text
 libonatti-software-system/
 ├── docs/
-│   └── brand/
+│   ├── brand/
 │       ├── README.md          # Manual da identidade visual
 │       ├── logo-mark.svg      # Símbolo compacto ML
 │       ├── logo-primary.svg   # Assinatura principal
 │       └── tokens.css         # Cores, fontes, espaços e movimento
+│   └── catalog/
+│       └── README.md          # Padrão para os próximos cases
 ├── site/
 │   ├── index.html             # Página principal multilíngue
 │   ├── blog.html              # Blog e artigo inicial
 │   ├── app.js                 # Conteúdo e interações do site
 │   ├── blog.js                # Conteúdo localizado do blog
+│   ├── case.css               # Sistema visual dos cases
+│   ├── case.js                # Interações compartilhadas
+│   ├── projects/              # Cases completos em PT, ES e EN
 │   ├── styles.css             # Sistema visual da interface
 │   ├── nginx.conf             # Rotas e redirecionamentos
 │   └── Dockerfile             # Imagem de produção

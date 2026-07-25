@@ -699,6 +699,92 @@ button {
   background: var(--violet);
 }
 
+.project-nogueira {
+  background: #0a2c4d;
+}
+
+.project-nogueira > img {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+  object-fit: cover;
+  object-position: 64% center;
+  opacity: .82;
+  transition: transform .7s cubic-bezier(.2,.75,.25,1), opacity .4s ease;
+}
+
+.project-nogueira::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(10,44,77,.95), rgba(10,44,77,.18) 68%, rgba(8,8,8,.08));
+}
+
+.project-nogueira:hover > img {
+  transform: scale(1.035);
+  opacity: 1;
+}
+
+.project-nogueira .project-code,
+.project-nogueira small,
+.project-browser {
+  z-index: 2;
+  color: var(--white);
+}
+
+.project-browser {
+  width: min(76%, 640px);
+  min-height: 220px;
+  padding: 14px;
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+  border: 1px solid rgba(255,255,255,.28);
+  background: rgba(8,8,8,.35);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 30px 80px rgba(0,0,0,.32);
+}
+
+.project-browser > span {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--lime);
+}
+
+.project-browser > span:nth-child(2) { background: var(--orange); }
+.project-browser > span:nth-child(3) { background: var(--violet); }
+
+.project-browser b {
+  position: absolute;
+  right: 18px;
+  bottom: 16px;
+  font: 600 clamp(17px, 2.4vw, 34px)/1 "Geist Mono", monospace;
+  text-align: right;
+}
+
+.project-case-link {
+  margin: auto 0 25px;
+  padding: 16px 0;
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid rgba(8,8,8,.28);
+  border-bottom: 1px solid rgba(8,8,8,.28);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.project-case-link b {
+  font-size: 18px;
+  transition: transform .2s ease;
+}
+
+.project-case-link:hover b {
+  transform: translate(4px, -4px);
+}
+
 .project-code {
   position: absolute;
   top: 20px;

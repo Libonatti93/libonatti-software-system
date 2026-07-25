@@ -1,0 +1,526 @@
+@import url("https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700;800;900&display=swap");
+
+:root {
+  --ink: #080808;
+  --paper: #f2f1ed;
+  --muted: #979792;
+  --line: rgba(242, 241, 237, .18);
+  --lime: #d9ff43;
+  --orange: #ff4d00;
+  --violet: #9c7cff;
+  --medical: #14508b;
+  --medical-dark: #0a2c4d;
+  --page: min(100% - 40px, 1280px);
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  color: var(--paper);
+  background: var(--ink);
+  font-family: Inter, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
+
+.skip-link {
+  position: fixed;
+  top: -100px;
+  left: 20px;
+  z-index: 200;
+  padding: 12px 18px;
+  color: var(--ink);
+  background: var(--lime);
+}
+.skip-link:focus { top: 20px; }
+
+.case-header {
+  height: 72px;
+  padding: 0 max(20px, calc((100% - 1280px) / 2));
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--line);
+  background: rgba(8,8,8,.82);
+  backdrop-filter: blur(16px);
+}
+
+.case-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font: 700 10px/1 "Geist Mono", monospace;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+.case-brand b {
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  color: var(--ink);
+  background: var(--lime);
+}
+
+.case-nav,
+.case-languages {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  font: 600 11px "Geist Mono", monospace;
+}
+.case-nav a:hover,
+.case-languages a:hover { color: var(--lime); }
+.case-languages { gap: 9px; color: var(--muted); }
+.case-languages [aria-current="page"] { color: var(--lime); }
+
+.case-hero {
+  min-height: 100svh;
+  padding: 130px max(20px, calc((100% - 1280px) / 2)) 60px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  background: var(--medical-dark);
+}
+.case-hero-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 64% center;
+  opacity: .55;
+}
+.case-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(8,8,8,.98) 0%, rgba(8,8,8,.86) 48%, rgba(10,44,77,.2) 78%),
+    linear-gradient(0deg, rgba(8,8,8,.74), transparent 40%);
+}
+.case-hero > *:not(img) { position: relative; z-index: 1; }
+
+.eyebrow,
+.section-code,
+.case-meta,
+.capability-number,
+.metric-label {
+  font: 600 10px/1.4 "Geist Mono", monospace;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+.eyebrow {
+  width: fit-content;
+  padding: 9px 12px;
+  border: 1px solid rgba(255,255,255,.25);
+  color: var(--lime);
+}
+.case-hero h1 {
+  max-width: 1050px;
+  margin: auto 0 35px;
+  font-size: clamp(62px, 9.5vw, 145px);
+  line-height: .84;
+  letter-spacing: -.085em;
+}
+.case-hero h1 em {
+  display: block;
+  color: transparent;
+  font-style: normal;
+  -webkit-text-stroke: 1.5px var(--paper);
+}
+.hero-bottom {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 70px;
+  align-items: end;
+}
+.hero-bottom > p {
+  max-width: 680px;
+  margin: 0;
+  color: #d0cfca;
+  font-size: clamp(17px, 1.7vw, 24px);
+  line-height: 1.45;
+}
+.case-meta {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid var(--line);
+}
+.case-meta div { padding-top: 13px; }
+.case-meta span { display: block; color: var(--muted); margin-bottom: 7px; }
+
+.case-section {
+  padding: 130px max(20px, calc((100% - 1280px) / 2));
+}
+.section-head {
+  margin-bottom: 75px;
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  gap: 45px;
+  border-top: 1px solid currentColor;
+  padding-top: 14px;
+}
+.section-head h2 {
+  max-width: 980px;
+  margin: 0;
+  font-size: clamp(45px, 6.8vw, 95px);
+  line-height: .93;
+  letter-spacing: -.07em;
+}
+
+.case-intro { color: var(--ink); background: var(--paper); }
+.intro-grid {
+  margin-left: 25%;
+  display: grid;
+  grid-template-columns: 1.15fr .85fr;
+  gap: 80px;
+}
+.intro-lead {
+  margin: 0;
+  font-size: clamp(27px, 3.4vw, 48px);
+  line-height: 1.14;
+  letter-spacing: -.045em;
+}
+.intro-copy p {
+  margin: 0 0 24px;
+  color: #4f4f4b;
+  font-size: 17px;
+  line-height: 1.7;
+}
+
+.journey {
+  overflow: hidden;
+  background: var(--ink);
+}
+.journey-track {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  border-top: 1px solid var(--line);
+  border-left: 1px solid var(--line);
+}
+.journey-step {
+  min-height: 250px;
+  padding: 22px;
+  position: relative;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.journey-step b {
+  color: var(--lime);
+  font: 500 10px "Geist Mono", monospace;
+}
+.journey-step h3 {
+  margin: 80px 0 12px;
+  font-size: 21px;
+  letter-spacing: -.04em;
+}
+.journey-step p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.55;
+}
+.journey-step::after {
+  content: "→";
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  color: var(--orange);
+}
+.journey-step:last-child::after { content: "✓"; color: var(--lime); }
+
+.crm-section { color: var(--ink); background: var(--lime); }
+.crm-frame {
+  display: grid;
+  grid-template-columns: .72fr 1.6fr;
+  min-height: 620px;
+  overflow: hidden;
+  border: 1px solid rgba(8,8,8,.35);
+  background: #eafc99;
+  box-shadow: 18px 18px 0 var(--ink);
+}
+.crm-sidebar {
+  padding: 30px;
+  color: var(--paper);
+  background: var(--medical-dark);
+}
+.crm-sidebar strong {
+  display: block;
+  margin-bottom: 55px;
+  font: 700 13px "Geist Mono", monospace;
+}
+.crm-sidebar span {
+  padding: 13px 0;
+  display: block;
+  border-bottom: 1px solid rgba(255,255,255,.14);
+  color: rgba(255,255,255,.68);
+  font-size: 13px;
+}
+.crm-sidebar span.active { color: var(--lime); }
+.crm-dashboard { padding: 28px; overflow: hidden; }
+.crm-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.crm-top h3 { margin: 0; font-size: 28px; letter-spacing: -.05em; }
+.crm-top b {
+  padding: 9px 12px;
+  color: var(--paper);
+  background: var(--medical);
+  font: 600 9px "Geist Mono", monospace;
+}
+.crm-metrics {
+  margin: 25px 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+.crm-metric {
+  min-height: 115px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 1px solid rgba(8,8,8,.22);
+  background: var(--paper);
+}
+.crm-metric strong { font-size: 28px; }
+.crm-metric span { color: #62625d; font-size: 10px; }
+.pipeline {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(150px, 1fr));
+  gap: 8px;
+}
+.pipeline-column {
+  min-height: 300px;
+  padding: 12px;
+  border: 1px solid rgba(8,8,8,.18);
+  background: rgba(255,255,255,.35);
+}
+.pipeline-column > b {
+  font: 600 9px "Geist Mono", monospace;
+  text-transform: uppercase;
+}
+.pipeline-card {
+  margin-top: 12px;
+  padding: 14px;
+  background: var(--paper);
+  box-shadow: 0 10px 24px rgba(8,8,8,.09);
+}
+.pipeline-card strong,
+.pipeline-card span { display: block; }
+.pipeline-card strong { font-size: 12px; }
+.pipeline-card span { margin-top: 7px; color: #686863; font-size: 9px; }
+
+.capabilities { background: #111; }
+.capability-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid var(--line);
+  border-left: 1px solid var(--line);
+}
+.capability {
+  min-height: 285px;
+  padding: 25px;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.capability-number { color: var(--orange); }
+.capability h3 {
+  margin: 80px 0 14px;
+  font-size: 29px;
+  line-height: 1;
+  letter-spacing: -.05em;
+}
+.capability p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.architecture { color: var(--ink); background: var(--paper); }
+.architecture-map {
+  margin-left: 25%;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  align-items: stretch;
+}
+.architecture-node {
+  min-height: 180px;
+  padding: 20px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 1px solid rgba(8,8,8,.25);
+  border-right: 0;
+}
+.architecture-node:last-child { border-right: 1px solid rgba(8,8,8,.25); }
+.architecture-node:not(:last-child)::after {
+  content: "→";
+  position: absolute;
+  top: 50%;
+  right: -13px;
+  z-index: 2;
+  width: 26px;
+  height: 26px;
+  display: grid;
+  place-items: center;
+  color: var(--paper);
+  background: var(--orange);
+  border-radius: 50%;
+}
+.architecture-node b { font: 600 10px "Geist Mono", monospace; }
+.architecture-node strong { font-size: 20px; letter-spacing: -.04em; }
+
+.proof { background: var(--medical-dark); }
+.proof-grid {
+  display: grid;
+  grid-template-columns: 1.3fr .7fr;
+  gap: 18px;
+}
+.proof-photo {
+  min-height: 640px;
+  position: relative;
+  overflow: hidden;
+}
+.proof-photo img { width: 100%; height: 100%; object-fit: cover; }
+.proof-note {
+  padding: 35px;
+  display: flex;
+  flex-direction: column;
+  color: var(--ink);
+  background: var(--lime);
+}
+.proof-note .metric-label { color: #4f5d13; }
+.proof-note h3 {
+  margin: auto 0 30px;
+  font-size: clamp(39px, 4vw, 61px);
+  line-height: .97;
+  letter-spacing: -.065em;
+}
+.proof-note p { margin: 0 0 25px; font-size: 15px; line-height: 1.6; }
+.external-link {
+  padding: 18px 0;
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.case-cta {
+  min-height: 760px;
+  display: flex;
+  flex-direction: column;
+  color: var(--ink);
+  background: var(--orange);
+}
+.case-cta h2 {
+  max-width: 1150px;
+  margin: auto 0 45px;
+  font-size: clamp(65px, 10vw, 145px);
+  line-height: .84;
+  letter-spacing: -.085em;
+}
+.case-cta h2 em {
+  display: block;
+  color: transparent;
+  font-style: normal;
+  -webkit-text-stroke: 1.5px var(--ink);
+}
+.cta-bottom {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+}
+.cta-bottom p {
+  max-width: 570px;
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.5;
+}
+.cta-link {
+  padding: 20px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+  font-weight: 700;
+}
+
+.case-footer {
+  padding: 35px max(20px, calc((100% - 1280px) / 2));
+  display: flex;
+  justify-content: space-between;
+  color: var(--muted);
+  background: var(--ink);
+  font: 500 10px "Geist Mono", monospace;
+  text-transform: uppercase;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity .7s ease, transform .7s cubic-bezier(.2,.75,.25,1);
+}
+.reveal.visible { opacity: 1; transform: none; }
+
+@media (max-width: 900px) {
+  .case-nav { display: none; }
+  .hero-bottom,
+  .intro-grid,
+  .proof-grid,
+  .cta-bottom { grid-template-columns: 1fr; }
+  .intro-grid,
+  .architecture-map { margin-left: 0; }
+  .journey-track { grid-template-columns: repeat(2, 1fr); }
+  .crm-frame { grid-template-columns: 1fr; }
+  .crm-sidebar { display: none; }
+  .crm-metrics { grid-template-columns: repeat(2, 1fr); }
+  .pipeline { overflow-x: auto; }
+  .capability-grid { grid-template-columns: repeat(2, 1fr); }
+  .architecture-map { grid-template-columns: 1fr; }
+  .architecture-node { border-right: 1px solid rgba(8,8,8,.25); border-bottom: 0; }
+  .architecture-node:last-child { border-bottom: 1px solid rgba(8,8,8,.25); }
+  .architecture-node:not(:last-child)::after {
+    top: auto; right: 20px; bottom: -13px; transform: rotate(90deg);
+  }
+}
+
+@media (max-width: 560px) {
+  .case-languages { gap: 6px; }
+  .case-brand span { display: none; }
+  .case-hero,
+  .case-section { padding-right: 14px; padding-left: 14px; }
+  .case-hero { min-height: 850px; }
+  .case-hero h1 { font-size: clamp(56px, 17vw, 82px); }
+  .case-meta { grid-template-columns: 1fr; gap: 14px; }
+  .section-head { grid-template-columns: 1fr; gap: 25px; }
+  .journey-track,
+  .capability-grid { grid-template-columns: 1fr; }
+  .crm-dashboard { padding: 14px; }
+  .crm-metrics { grid-template-columns: 1fr 1fr; }
+  .proof-photo { min-height: 430px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}

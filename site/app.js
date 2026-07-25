@@ -32,8 +32,9 @@ const translations = {
     projectsLabel: "Trabalhos selecionados",
     projectsTitle: "Projetos feitos para mover o ponteiro.",
     projectsText: "Este espaço está pronto para receber seus melhores cases, com contexto, stack, decisões e resultados — não apenas screenshots.",
-    imagePlaceholder: "Imagem do projeto",
-    project1Text: "O ecossistema que vai reunir e apresentar os produtos construídos por aqui.",
+    liveProduct: "Produto real em produção ↗",
+    viewCase: "Explorar o case",
+    project1Text: "Plataforma digital que conecta aquisição, pacientes, consultas, pagamentos, exames e um CRM próprio.",
     nextProject: "Seu próximo projeto",
     comingSoon: "Em breve",
     buildingHistory: "Estamos construindo a história.",
@@ -78,8 +79,9 @@ const translations = {
     projectsLabel: "Trabajos seleccionados",
     projectsTitle: "Proyectos creados para generar impacto.",
     projectsText: "Este espacio está listo para tus mejores casos, con contexto, stack, decisiones y resultados — no solamente screenshots.",
-    imagePlaceholder: "Imagen del proyecto",
-    project1Text: "El ecosistema que reunirá y presentará los productos construidos aquí.",
+    liveProduct: "Producto real en producción ↗",
+    viewCase: "Explorar el caso",
+    project1Text: "Plataforma digital que conecta adquisición, pacientes, turnos, pagos, estudios y un CRM propio.",
     nextProject: "Tu próximo proyecto",
     comingSoon: "Próximamente",
     buildingHistory: "Estamos construyendo la historia.",
@@ -124,8 +126,9 @@ const translations = {
     projectsLabel: "Selected work",
     projectsTitle: "Projects built to move the needle.",
     projectsText: "This space is ready for your best case studies, with context, stack, decisions and outcomes — not just screenshots.",
-    imagePlaceholder: "Project image",
-    project1Text: "The ecosystem that will bring together and showcase the products built here.",
+    liveProduct: "Live product in production ↗",
+    viewCase: "Explore the case study",
+    project1Text: "A digital platform connecting acquisition, patients, appointments, payments, exams and a custom-built CRM.",
     nextProject: "Your next project",
     comingSoon: "Coming soon",
     buildingHistory: "We're building the story.",
@@ -162,6 +165,14 @@ function setLanguage(language) {
   const locale = { pt: "pt-br", es: "es", en: "en" }[language];
   document.querySelectorAll("[data-localized-link='blog']").forEach((link) => {
     link.href = `/${locale}/blog/`;
+  });
+  const casePath = {
+    pt: "/pt-br/projetos/nogueira-cardiologia/",
+    es: "/es/proyectos/nogueira-cardiologia/",
+    en: "/en/projects/nogueira-cardiologia/"
+  }[language];
+  document.querySelectorAll("[data-localized-link='nogueira-case']").forEach((link) => {
+    link.href = casePath;
   });
 }
 
