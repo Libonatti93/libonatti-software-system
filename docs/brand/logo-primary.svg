@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1040 240" role="img" aria-labelledby="title desc">
+  <title id="title">Matheus Libonatti — Software Engineer</title>
+  <desc id="desc">Símbolo ML verde-limão com o nome Matheus Libonatti e a descrição Software Engineer.</desc>
+  <rect width="1040" height="240" fill="#080808"/>
+  <rect x="40" y="40" width="160" height="160" fill="#D9FF43"/>
+  <path fill="#080808" d="M64 78h24l32 46 32-46h24v84h-25v-47l-31 43-31-43v47H64V78Z"/>
+  <text x="242" y="113" fill="#F2F1ED" font-family="Inter, Arial, sans-serif" font-size="70" font-weight="800" letter-spacing="-4">MATHEUS LIBONATTI</text>
+  <text x="246" y="160" fill="#979792" font-family="'Courier New', monospace" font-size="19" font-weight="700" letter-spacing="5">SOFTWARE ENGINEER · FULL-STACK DEVELOPER</text>
+  <rect x="246" y="185" width="500" height="4" fill="#FF4D00"/>
+</svg>
