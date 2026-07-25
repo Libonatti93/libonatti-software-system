@@ -153,6 +153,129 @@ button {
   color: var(--lime);
 }
 
+.lang[aria-current="page"] {
+  color: var(--lime);
+}
+
+.blog-main {
+  min-height: 100vh;
+  padding-top: 72px;
+}
+
+.blog-hero {
+  min-height: 70vh;
+  padding: 110px max(20px, calc((100% - 1180px) / 2)) 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  border-bottom: 1px solid var(--line);
+}
+
+.blog-kicker,
+.article-meta {
+  font: 500 10px/1.4 "Geist Mono", monospace;
+  letter-spacing: .08em;
+}
+
+.blog-kicker { color: var(--lime); }
+
+.blog-hero h1 {
+  max-width: 1000px;
+  margin: 30px 0;
+  font-size: clamp(65px, 10vw, 145px);
+  line-height: .84;
+  letter-spacing: -.085em;
+}
+
+.blog-hero > p:last-child {
+  max-width: 720px;
+  margin: 0 0 0 auto;
+  color: #c1c0bb;
+  font-size: clamp(18px, 2vw, 27px);
+  line-height: 1.35;
+}
+
+.article-list {
+  max-width: 1180px;
+  margin: auto;
+  padding: 110px 20px 140px;
+}
+
+.featured-article {
+  padding: 28px 0 70px;
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  gap: 45px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.article-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  color: var(--gray);
+}
+
+.featured-article h2 {
+  max-width: 850px;
+  margin: 0 0 28px;
+  font-size: clamp(42px, 6vw, 78px);
+  line-height: .98;
+  letter-spacing: -.06em;
+}
+
+.featured-article p,
+.article-body p {
+  color: #b4b3ae;
+  font-size: 18px;
+  line-height: 1.65;
+}
+
+.featured-article p { max-width: 680px; }
+
+.article-body {
+  max-width: 760px;
+  margin: 90px 0 0 auto;
+}
+
+.article-body .article-deck {
+  margin-bottom: 75px;
+  color: var(--white);
+  font-size: 26px;
+  line-height: 1.45;
+}
+
+.article-body h3 {
+  margin: 65px 0 18px;
+  font-size: 32px;
+  letter-spacing: -.04em;
+}
+
+.article-body blockquote {
+  margin: 70px 0;
+  padding: 30px 0 30px 35px;
+  border-left: 4px solid var(--lime);
+  color: var(--white);
+  font-size: clamp(26px, 3vw, 42px);
+  line-height: 1.2;
+}
+
+.blog-footer {
+  padding: 35px max(20px, calc((100% - 1180px) / 2));
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid var(--line);
+  color: var(--gray);
+  font-size: 12px;
+}
+
+@media (max-width: 700px) {
+  .featured-article { grid-template-columns: 1fr; }
+  .article-meta { flex-direction: row; flex-wrap: wrap; }
+  .blog-hero { min-height: 600px; }
+}
+
 .menu-button {
   display: none;
   gap: 8px;

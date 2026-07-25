@@ -4,6 +4,7 @@ const translations = {
     navAbout: "Sobre",
     navServices: "Serviços",
     navProjects: "Projetos",
+    navBlog: "Blog",
     navContact: "Contato",
     menu: "Menu",
     availability: "Disponível para projetos selecionados",
@@ -49,6 +50,7 @@ const translations = {
     navAbout: "Sobre mí",
     navServices: "Servicios",
     navProjects: "Proyectos",
+    navBlog: "Blog",
     navContact: "Contacto",
     menu: "Menú",
     availability: "Disponible para proyectos seleccionados",
@@ -94,6 +96,7 @@ const translations = {
     navAbout: "About",
     navServices: "Services",
     navProjects: "Projects",
+    navBlog: "Blog",
     navContact: "Contact",
     menu: "Menu",
     availability: "Available for selected projects",
@@ -152,18 +155,22 @@ function setLanguage(language) {
   languageButtons.forEach((button) => {
     const active = button.dataset.lang === language;
     button.classList.toggle("active", active);
-    button.setAttribute("aria-pressed", String(active));
+    if (active) button.setAttribute("aria-current", "page");
+    else button.removeAttribute("aria-current");
   });
 
-  localStorage.setItem("ml-language", language);
+  const locale = { pt: "pt-br", es: "es", en: "en" }[language];
+  document.querySelectorAll("[data-localized-link='blog']").forEach((link) => {
+    link.href = `/${locale}/blog/`;
+  });
 }
 
-languageButtons.forEach((button) => {
-  button.addEventListener("click", () => setLanguage(button.dataset.lang));
-});
-
-const storedLanguage = localStorage.getItem("ml-language");
-if (storedLanguage) setLanguage(storedLanguage);
+const pathLanguage = location.pathname.startsWith("/es")
+  ? "es"
+  : location.pathname.startsWith("/en")
+    ? "en"
+    : "pt";
+setLanguage(pathLanguage);
 
 const menuButton = document.querySelector(".menu-button");
 const mobileMenu = document.querySelector(".mobile-menu");
