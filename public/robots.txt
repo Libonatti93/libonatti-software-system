@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://matheus-libonatti.libonattimatheus.chatgpt.site/sitemap.xml
