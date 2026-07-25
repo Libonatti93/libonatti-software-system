@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Matheus Libonatti — Engenheiro de Software e Desenvolvedor Full Stack. Produtos digitais, APIs, automações e sistemas feitos para performar."
+    />
+    <meta name="theme-color" content="#080808" />
+    <title>Matheus Libonatti — Software Engineer & Full-Stack Developer</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <script src="/app.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main" data-i18n="skip">Pular para o conteúdo</a>
+
+    <header class="site-header">
+      <a class="identity" href="#inicio" aria-label="Matheus Libonatti — Início">
+        <span class="identity-mark">ML</span>
+        <span class="identity-name">Matheus<br />Libonatti</span>
+      </a>
+
+      <nav class="desktop-nav" aria-label="Navegação principal">
+        <a href="#sobre" data-i18n="navAbout">Sobre</a>
+        <a href="#servicos" data-i18n="navServices">Serviços</a>
+        <a href="#projetos" data-i18n="navProjects">Projetos</a>
+        <a href="#contato" data-i18n="navContact">Contato</a>
+      </nav>
+
+      <div class="header-actions">
+        <div class="language-switcher" aria-label="Selecionar idioma">
+          <button class="lang active" data-lang="pt" aria-pressed="true">PT</button>
+          <button class="lang" data-lang="es" aria-pressed="false">ES</button>
+          <button class="lang" data-lang="en" aria-pressed="false">EN</button>
+        </div>
+        <button class="menu-button" aria-expanded="false" aria-controls="mobile-menu">
+          <span data-i18n="menu">Menu</span>
+          <i></i>
+        </button>
+      </div>
+    </header>
+
+    <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+      <nav>
+        <a href="#sobre"><span>01</span><b data-i18n="navAbout">Sobre</b></a>
+        <a href="#servicos"><span>02</span><b data-i18n="navServices">Serviços</b></a>
+        <a href="#projetos"><span>03</span><b data-i18n="navProjects">Projetos</b></a>
+        <a href="#contato"><span>04</span><b data-i18n="navContact">Contato</b></a>
+      </nav>
+    </div>
+
+    <main id="main">
+      <section class="hero" id="inicio">
+        <div class="hero-status">
+          <span class="live-dot"></span>
+          <span data-i18n="availability">Disponível para projetos selecionados</span>
+        </div>
+
+        <h1>
+          <span data-i18n="heroLine1">Eu construo software</span>
+          <span class="outline" data-i18n="heroLine2">que trabalha de verdade.</span>
+        </h1>
+
+        <div class="hero-meta">
+          <p data-i18n="heroIntro">
+            Engenheiro de software e desenvolvedor full stack criando produtos
+            digitais, sistemas e automações que transformam complexidade em resultado.
+          </p>
+          <a class="round-link magnetic" href="#projetos" aria-label="Ver projetos">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M5 12h14M14 6l6 6-6 6" />
+            </svg>
+          </a>
+        </div>
+
+        <div class="ticker" aria-hidden="true">
+          <div>
+            <span>SOFTWARE ENGINEERING</span><i>✳</i>
+            <span>FULL-STACK DEVELOPMENT</span><i>✳</i>
+            <span>APIs & AUTOMATION</span><i>✳</i>
+            <span>SOFTWARE ENGINEERING</span><i>✳</i>
+            <span>FULL-STACK DEVELOPMENT</span><i>✳</i>
+            <span>APIs & AUTOMATION</span><i>✳</i>
+          </div>
+        </div>
+      </section>
+
+      <section class="about section" id="sobre">
+        <div class="section-label">
+          <span>01</span>
+          <p data-i18n="aboutLabel">Quem sou</p>
+        </div>
+        <div class="about-content">
+          <p class="lead reveal" data-i18n="aboutLead">
+            Sou Matheus Libonatti, engenheiro de software. Transformo ideias em
+            produtos digitais sólidos — da arquitetura à experiência final.
+          </p>
+
+          <div class="about-grid">
+            <div class="portrait-placeholder reveal">
+              <div class="portrait-grid"></div>
+              <span class="portrait-monogram">ML</span>
+              <small data-i18n="photoPlaceholder">Sua foto entrará aqui</small>
+            </div>
+            <div class="about-copy reveal">
+              <p data-i18n="aboutText">
+                Trabalho entre estratégia, tecnologia e produto. Gosto de entender
+                o problema antes de escolher a ferramenta, construir com clareza e
+                entregar soluções que continuem boas quando o negócio crescer.
+              </p>
+              <div class="fact-list">
+                <div>
+                  <span data-i18n="baseLabel">Base</span>
+                  <strong>Brasil · LATAM · Remote</strong>
+                </div>
+                <div>
+                  <span data-i18n="focusLabel">Foco</span>
+                  <strong>Web · APIs · Automation</strong>
+                </div>
+                <div>
+                  <span data-i18n="languagesLabel">Idiomas</span>
+                  <strong>PT · ES · EN</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="services section" id="servicos">
+        <div class="section-label light">
+          <span>02</span>
+          <p data-i18n="servicesLabel">O que eu faço</p>
+        </div>
+        <div class="services-heading">
+          <h2 class="reveal" data-i18n="servicesTitle">
+            Engenharia que transforma ambição em produto.
+          </h2>
+          <p class="reveal" data-i18n="servicesIntro">
+            Da primeira conversa ao software em produção, cada decisão existe para
+            gerar impacto, confiança e velocidade.
+          </p>
+        </div>
+
+        <div class="service-list">
+          <article class="service-item reveal">
+            <span>01</span>
+            <h3 data-i18n="service1Title">Produtos & Plataformas</h3>
+            <p data-i18n="service1Text">
+              Aplicações web rápidas, acessíveis e preparadas para evoluir.
+            </p>
+            <b>↗</b>
+          </article>
+          <article class="service-item reveal">
+            <span>02</span>
+            <h3 data-i18n="service2Title">APIs & Integrações</h3>
+            <p data-i18n="service2Text">
+              Serviços confiáveis que conectam sistemas, equipes e dados.
+            </p>
+            <b>↗</b>
+          </article>
+          <article class="service-item reveal">
+            <span>03</span>
+            <h3 data-i18n="service3Title">Automação & IA</h3>
+            <p data-i18n="service3Text">
+              Fluxos inteligentes para reduzir tarefas e aumentar capacidade.
+            </p>
+            <b>↗</b>
+          </article>
+          <article class="service-item reveal">
+            <span>04</span>
+            <h3 data-i18n="service4Title">Arquitetura & Consultoria</h3>
+            <p data-i18n="service4Text">
+              Decisões técnicas sólidas para produtos que precisam crescer.
+            </p>
+            <b>↗</b>
+          </article>
+        </div>
+      </section>
+
+      <section class="projects section" id="projetos">
+        <div class="section-label">
+          <span>03</span>
+          <p data-i18n="projectsLabel">Trabalhos selecionados</p>
+        </div>
+        <div class="projects-intro">
+          <h2 class="reveal" data-i18n="projectsTitle">Projetos feitos para mover o ponteiro.</h2>
+          <p class="reveal" data-i18n="projectsText">
+            Este espaço está pronto para receber seus melhores cases, com contexto,
+            stack, decisões e resultados — não apenas screenshots.
+          </p>
+        </div>
+
+        <div class="project-stack">
+          <article class="project-card project-lime reveal">
+            <div class="project-visual">
+              <span class="project-code">CASE — 001</span>
+              <div class="visual-orbit">
+                <i></i><i></i><i></i>
+                <strong>ML</strong>
+              </div>
+              <small data-i18n="imagePlaceholder">Imagem do projeto</small>
+            </div>
+            <div class="project-info">
+              <span>Product · Engineering</span>
+              <h3>Libonatti Software System</h3>
+              <p data-i18n="project1Text">
+                O ecossistema que vai reunir e apresentar os produtos construídos por aqui.
+              </p>
+              <div class="tags"><b>Architecture</b><b>Full Stack</b><b>2026</b></div>
+            </div>
+          </article>
+
+          <article class="project-card project-violet reveal">
+            <div class="project-visual">
+              <span class="project-code">CASE — NEXT</span>
+              <div class="visual-cross">+</div>
+              <small data-i18n="nextProject">Seu próximo projeto</small>
+            </div>
+            <div class="project-info">
+              <span data-i18n="comingSoon">Em breve</span>
+              <h3 data-i18n="buildingHistory">Estamos construindo a história.</h3>
+              <p data-i18n="project2Text">
+                Novos cases serão adicionados com imagens, números e detalhes técnicos.
+              </p>
+              <div class="tags"><b>Web</b><b>APIs</b><b>Automation</b></div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="contact section" id="contato">
+        <div class="contact-top">
+          <div class="section-label light">
+            <span>04</span>
+            <p data-i18n="contactLabel">Fale comigo</p>
+          </div>
+          <span class="timezone">UTC−03 · <b id="clock">00:00</b></span>
+        </div>
+
+        <div class="contact-main">
+          <h2 class="reveal">
+            <span data-i18n="contactLine1">Tem um desafio?</span>
+            <em data-i18n="contactLine2">Vamos conversar.</em>
+          </h2>
+          <p class="reveal" data-i18n="contactText">
+            Conte o que você quer construir, melhorar ou destravar. Eu respondo com
+            clareza sobre o melhor próximo passo.
+          </p>
+          <a
+            class="contact-cta magnetic"
+            href="https://github.com/Libonatti93"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <span data-i18n="contactButton">Abrir contato pelo GitHub</span>
+            <b>↗</b>
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer-title">
+        <span>MATHEUS</span>
+        <span class="outline">LIBONATTI</span>
+      </div>
+      <div class="footer-bottom">
+        <p>© <span id="year"></span> Matheus Libonatti</p>
+        <p>Software Engineer · Full-Stack Developer</p>
+        <a href="#inicio" data-i18n="backToTop">Voltar ao topo ↑</a>
+      </div>
+    </footer>
+  </body>
+</html>
