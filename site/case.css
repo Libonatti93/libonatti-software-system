@@ -51,20 +51,16 @@ img { max-width: 100%; display: block; }
 }
 
 .case-brand {
+  width: 230px;
+  height: 54px;
   display: flex;
   align-items: center;
-  gap: 10px;
-  font: 700 10px/1 "Geist Mono", monospace;
-  letter-spacing: .04em;
-  text-transform: uppercase;
+  overflow: hidden;
 }
-.case-brand b {
-  width: 36px;
-  height: 36px;
-  display: grid;
-  place-items: center;
-  color: var(--ink);
-  background: var(--lime);
+.case-brand img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .case-nav,
@@ -502,7 +498,7 @@ img { max-width: 100%; display: block; }
 
 @media (max-width: 560px) {
   .case-languages { gap: 6px; }
-  .case-brand span { display: none; }
+  .case-brand { width: 155px; height: 48px; }
   .case-hero,
   .case-section { padding-right: 14px; padding-left: 14px; }
   .case-hero { min-height: 850px; }

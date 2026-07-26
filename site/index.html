@@ -13,6 +13,7 @@
     <link rel="alternate" hreflang="es-419" href="/es/" />
     <link rel="alternate" hreflang="en" href="/en/" />
     <link rel="alternate" hreflang="x-default" href="/pt-br/" />
+    <link rel="icon" type="image/png" href="/images/logo-transparent.png" />
     <link rel="stylesheet" href="/styles.css" />
     <script src="/app.js" defer></script>
   </head>
@@ -21,8 +22,7 @@
 
     <header class="site-header">
       <a class="identity" href="#inicio" aria-label="Matheus Libonatti — Início">
-        <span class="identity-mark">ML</span>
-        <span class="identity-name">Matheus<br />Libonatti</span>
+        <img class="brand-logo" src="/images/logo-transparent.png" alt="Matheus Libonatti" />
       </a>
 
       <nav class="desktop-nav" aria-label="Navegação principal">
@@ -104,11 +104,14 @@
           </p>
 
           <div class="about-grid">
-            <div class="portrait-placeholder reveal">
-              <div class="portrait-grid"></div>
-              <span class="portrait-monogram">ML</span>
-              <small data-i18n="photoPlaceholder">Sua foto entrará aqui</small>
-            </div>
+            <figure class="portrait reveal">
+              <img
+                src="/images/matheus.png"
+                alt="Matheus Libonatti apresentando uma palestra"
+                loading="lazy"
+                decoding="async"
+              />
+            </figure>
             <div class="about-copy reveal">
               <p data-i18n="aboutText">
                 Trabalho entre estratégia, tecnologia e produto. Gosto de entender
@@ -122,7 +125,7 @@
                 </div>
                 <div>
                   <span data-i18n="focusLabel">Foco</span>
-                  <strong>Web · APIs · Automation</strong>
+                  <strong>Web · APIs · Automation · IA · SaaS · Banco de Dados</strong>
                 </div>
                 <div>
                   <span data-i18n="languagesLabel">Idiomas</span>
