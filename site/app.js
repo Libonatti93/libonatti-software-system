@@ -224,6 +224,9 @@ function setLanguage(language) {
   if (!dictionary) return;
 
   html.lang = language === "pt" ? "pt-BR" : language;
+  document.querySelectorAll("[data-pt-legal]").forEach((element) => {
+    element.hidden = language !== "pt";
+  });
   document.querySelectorAll("[data-i18n]").forEach((element) => {
     const value = dictionary[element.dataset.i18n];
     if (value) element.textContent = value;
@@ -436,5 +439,8 @@ function updateClock() {
 }
 
 document.querySelector("#year").textContent = new Date().getFullYear();
+document.querySelectorAll("[data-legal-year]").forEach((element) => {
+  element.textContent = new Date().getFullYear();
+});
 updateClock();
 setInterval(updateClock, 60_000);

@@ -1232,6 +1232,32 @@ footer {
   margin: 0;
 }
 
+.footer-legal {
+  margin-top: 28px;
+  padding-top: 22px;
+  display: grid;
+  grid-template-columns: .8fr 1fr 1.8fr;
+  gap: 30px;
+  border-top: 1px solid var(--line);
+  color: var(--gray);
+  font: 500 9px/1.6 "Geist Mono", monospace;
+  letter-spacing: .01em;
+  text-transform: uppercase;
+}
+
+.footer-legal[hidden] {
+  display: none;
+}
+
+.footer-legal p {
+  margin: 0;
+}
+
+.footer-legal strong {
+  color: var(--white);
+  font-weight: 600;
+}
+
 .reveal {
   opacity: 0;
   transform: translateY(35px);
@@ -1347,6 +1373,11 @@ footer {
 
   .footer-bottom {
     grid-template-columns: 1fr auto;
+  }
+
+  .footer-legal {
+    grid-template-columns: 1fr;
+    gap: 12px;
   }
 
   .footer-bottom p:nth-child(2) {
