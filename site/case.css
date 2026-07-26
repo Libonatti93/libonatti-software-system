@@ -104,6 +104,16 @@ img { max-width: 100%; display: block; }
 }
 .case-hero > *:not(img) { position: relative; z-index: 1; }
 
+.tripoli-hero { background: #103f2b; }
+.tripoli-hero .case-hero-photo { object-position: center 35%; opacity: .4; }
+.tripoli-hero::after {
+  background:
+    linear-gradient(90deg, rgba(8,8,8,.97) 0%, rgba(16,63,43,.8) 52%, rgba(16,63,43,.18) 82%),
+    linear-gradient(0deg, rgba(8,8,8,.72), transparent 42%);
+}
+.tripoli-proof { background: #e7e5df; }
+.tripoli-proof img { padding: 12%; object-fit: contain; }
+
 .eyebrow,
 .section-code,
 .case-meta,

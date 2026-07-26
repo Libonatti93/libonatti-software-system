@@ -38,7 +38,7 @@ const translations = {
     nextProject: "Seu próximo projeto",
     comingSoon: "Em breve",
     buildingHistory: "Estamos construindo a história.",
-    project2Text: "Novos cases serão adicionados com imagens, números e detalhes técnicos.",
+    project2Text: "Experiência digital e CRM para conectar simulações, atendimento consultivo e um funil comercial multissoluções.",
     contactLabel: "Fale comigo",
     contactLine1: "Tem um desafio?",
     contactLine2: "Vamos conversar.",
@@ -85,7 +85,7 @@ const translations = {
     nextProject: "Tu próximo proyecto",
     comingSoon: "Próximamente",
     buildingHistory: "Estamos construyendo la historia.",
-    project2Text: "Nuevos casos serán añadidos con imágenes, números y detalles técnicos.",
+    project2Text: "Experiencia digital y CRM para conectar simulaciones, atención consultiva y un embudo comercial multisolución.",
     contactLabel: "Hablemos",
     contactLine1: "¿Tienes un desafío?",
     contactLine2: "Hablemos.",
@@ -132,7 +132,7 @@ const translations = {
     nextProject: "Your next project",
     comingSoon: "Coming soon",
     buildingHistory: "We're building the story.",
-    project2Text: "New case studies will be added with images, numbers and technical details.",
+    project2Text: "Digital experience and CRM connecting simulations, consultative service and a multi-solution sales pipeline.",
     contactLabel: "Talk to me",
     contactLine1: "Got a challenge?",
     contactLine2: "Let's talk.",
@@ -173,6 +173,14 @@ function setLanguage(language) {
   }[language];
   document.querySelectorAll("[data-localized-link='nogueira-case']").forEach((link) => {
     link.href = casePath;
+  });
+  const tripoliPath = {
+    pt: "/pt-br/projetos/tripoli/",
+    es: "/es/proyectos/tripoli/",
+    en: "/en/projects/tripoli/"
+  }[language];
+  document.querySelectorAll("[data-localized-link='tripoli-case']").forEach((link) => {
+    link.href = tripoliPath;
   });
 }
 

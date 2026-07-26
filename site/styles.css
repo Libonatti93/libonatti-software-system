@@ -698,6 +698,17 @@ button {
   opacity: 1;
 }
 
+.project-tripoli {
+  background: #e7e5df;
+}
+
+.project-tripoli img {
+  width: 68%;
+  height: 68%;
+  object-fit: contain;
+  filter: drop-shadow(0 18px 38px rgba(16, 63, 43, .18));
+}
+
 .project-nogueira .project-code,
 .project-nogueira small,
 .project-browser {
