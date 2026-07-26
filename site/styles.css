@@ -867,6 +867,40 @@ button {
   background: var(--black-soft);
 }
 
+.project-etranslink {
+  color: var(--white);
+  background: #071710;
+}
+
+.project-etranslink > img {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+  object-fit: cover;
+  object-position: center;
+  opacity: .76;
+  transition: transform .7s cubic-bezier(.2,.75,.25,1), opacity .4s ease;
+}
+
+.project-etranslink::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(7,23,16,.96), rgba(7,23,16,.28) 72%, rgba(8,8,8,.12));
+}
+
+.project-etranslink .project-code,
+.project-etranslink > small,
+.project-etranslink .project-browser { z-index: 2; }
+.project-etranslink:hover > img { transform: scale(1.035); opacity: .92; }
+
+.project-etranslink-card .project-info {
+  color: #071710;
+  background: #ccff00;
+}
+.project-etranslink-card .project-info p { color: #284025; }
+
 .project-info > span {
   font: 500 10px "Geist Mono", monospace;
   text-transform: uppercase;
@@ -959,16 +993,132 @@ button {
   line-height: 1.4;
 }
 
-.contact-cta {
+.office-section {
+  margin: 75px 0 55px;
+}
+
+.office-heading {
+  margin-bottom: 28px;
+  display: grid;
+  grid-template-columns: minmax(180px, 0.65fr) 1.35fr;
+  gap: 35px;
+  align-items: end;
+}
+
+.office-heading > span,
+.office-country,
+.coordinates {
+  font: 600 10px "Geist Mono", monospace;
+  letter-spacing: 0.08em;
+}
+
+.office-heading h3 {
+  max-width: 720px;
+  margin: 0;
+  font-size: clamp(30px, 4vw, 58px);
+  line-height: 0.98;
+  letter-spacing: -0.055em;
+}
+
+.office-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.office-card {
+  overflow: hidden;
+  border: 1px solid rgba(8, 8, 8, 0.55);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.office-map {
+  height: 265px;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(8, 8, 8, 0.55);
+  background: #d8d2c4;
+}
+
+.office-map iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  filter: grayscale(1) contrast(1.05);
+}
+
+.office-info {
+  min-height: 265px;
+  padding: 26px;
+  display: flex;
+  flex-direction: column;
+}
+
+.office-info h4 {
+  margin: 8px 0 0;
+  font-size: 27px;
+  letter-spacing: -0.04em;
+}
+
+.office-info address {
+  margin: 26px 0 12px;
+  font-size: 15px;
+  font-style: normal;
+  line-height: 1.55;
+}
+
+.coordinates {
+  margin: 0 0 25px;
+  opacity: 0.7;
+}
+
+.office-info > a {
+  margin-top: auto;
+  padding-top: 17px;
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid rgba(8, 8, 8, 0.55);
+  font-size: 13px;
+  font-weight: 650;
+  text-transform: uppercase;
+}
+
+.office-info > a b {
+  font-size: 19px;
+  font-weight: 400;
+  transition: transform 0.2s ease;
+}
+
+.office-info > a:hover b {
+  transform: translate(4px, -4px);
+}
+
+.contact-actions {
   margin-left: auto;
   max-width: 600px;
+}
+
+.contact-cta {
   padding: 24px 0;
   display: flex;
   justify-content: space-between;
   border-top: 1px solid var(--black);
-  border-bottom: 1px solid var(--black);
   font-size: 18px;
   font-weight: 600;
+}
+
+.contact-cta:last-child {
+  border-bottom: 1px solid var(--black);
+}
+
+.contact-channel {
+  display: grid;
+  gap: 5px;
+}
+
+.contact-channel small {
+  font: 500 10px "Geist Mono", monospace;
+  letter-spacing: 0.02em;
+  opacity: 0.72;
 }
 
 .contact-cta b {
@@ -979,6 +1129,74 @@ button {
 
 .contact-cta:hover b {
   transform: translate(5px, -5px);
+}
+
+.consent-banner {
+  position: fixed;
+  z-index: 1000;
+  right: 22px;
+  bottom: 22px;
+  width: min(620px, calc(100% - 44px));
+  padding: 27px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 28px;
+  align-items: end;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(8, 8, 8, 0.96);
+  box-shadow: 0 22px 70px rgba(0, 0, 0, 0.42);
+  color: var(--white);
+  backdrop-filter: blur(16px);
+}
+
+.consent-banner[hidden] {
+  display: none;
+}
+
+.consent-copy > span {
+  color: var(--orange);
+  font: 600 9px "Geist Mono", monospace;
+  letter-spacing: 0.08em;
+}
+
+.consent-copy h2 {
+  margin: 10px 0 9px;
+  font-size: 24px;
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+}
+
+.consent-copy p {
+  max-width: 410px;
+  margin: 0;
+  color: #aaa;
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.consent-actions {
+  display: grid;
+  gap: 8px;
+  min-width: 185px;
+}
+
+.consent-actions button {
+  min-height: 43px;
+  padding: 0 14px;
+  border: 1px solid var(--orange);
+  font: 650 10px "Geist Mono", monospace;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.consent-primary {
+  background: var(--orange);
+  color: var(--black);
+}
+
+.consent-secondary {
+  background: transparent;
+  color: var(--white);
 }
 
 footer {
@@ -1119,8 +1337,12 @@ footer {
   }
 
   .contact-main > p,
-  .contact-cta {
+  .contact-actions {
     margin-left: 0;
+  }
+
+  .office-heading {
+    grid-template-columns: 1fr;
   }
 
   .footer-bottom {
@@ -1176,6 +1398,59 @@ footer {
 
   .timezone {
     display: none;
+  }
+
+  .office-section {
+    margin-top: 55px;
+  }
+
+  .office-grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .office-map {
+    height: 145px;
+  }
+
+  .office-info {
+    min-height: 285px;
+    padding: 14px 12px;
+  }
+
+  .office-info h4 {
+    font-size: 20px;
+  }
+
+  .office-country,
+  .coordinates {
+    font-size: 8px;
+    letter-spacing: 0.03em;
+  }
+
+  .office-info address {
+    margin-top: 18px;
+    font-size: 12px;
+    line-height: 1.45;
+  }
+
+  .office-info > a {
+    gap: 8px;
+    font-size: 9px;
+    line-height: 1.3;
+  }
+
+  .consent-banner {
+    right: 12px;
+    bottom: 12px;
+    width: calc(100% - 24px);
+    padding: 20px;
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .consent-actions {
+    grid-template-columns: 1fr;
   }
 }
 

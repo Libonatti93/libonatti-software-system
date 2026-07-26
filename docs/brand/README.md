@@ -134,3 +134,10 @@ Evite bancos de imagem genéricos, mockups excessivamente decorativos e ilustra�
 ## Tokens
 
 O arquivo [`tokens.css`](./tokens.css) contém as variáveis fundamentais prontas para reutilização em novas interfaces.
+
+## Documentação detalhada
+
+- [`colors.md`](./colors.md) — paleta, papéis semânticos e contraste;
+- [`typography.md`](./typography.md) — famílias, pesos e hierarquia;
+- [`logo-usage.md`](./logo-usage.md) — versões, área de proteção e usos incorretos;
+- [`components.md`](./components.md) — aplicação da identidade nos componentes digitais.

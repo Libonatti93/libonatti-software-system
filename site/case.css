@@ -114,6 +114,74 @@ img { max-width: 100%; display: block; }
 .tripoli-proof { background: #e7e5df; }
 .tripoli-proof img { padding: 12%; object-fit: contain; }
 
+.etranslink-hero {
+  color: var(--paper);
+  background:
+    linear-gradient(90deg, rgba(7,23,16,.94), rgba(7,23,16,.36)),
+    url("/images/etranslink/logistics-truck.jpg") center/cover,
+    radial-gradient(circle at 80% 20%, rgba(204,255,0,.2), transparent 27%),
+    linear-gradient(135deg, #071710, #103f2b);
+}
+.etranslink-hero::after {
+  background: linear-gradient(90deg, rgba(7,23,16,.96), rgba(7,23,16,.55) 58%, transparent);
+}
+.etranslink-grid {
+  position: absolute;
+  inset: 0;
+  opacity: .14;
+  background-image:
+    linear-gradient(rgba(255,255,255,.18) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.18) 1px, transparent 1px);
+  background-size: 58px 58px;
+}
+.etranslink-product { background: #ccff00; }
+.etranslink-product .crm-sidebar { background: #071710; }
+.etranslink-stories {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  padding-top: 24px;
+}
+.etranslink-stories article {
+  min-height: 175px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: var(--paper);
+  background: #103f2b;
+}
+.etranslink-stories span { font: 600 9px "Geist Mono", monospace; color: #ccff00; }
+.etranslink-stories h4 { margin: 0; font-size: 19px; line-height: 1.05; }
+.data-disclaimer {
+  max-width: 850px;
+  margin: 40px 0 0 auto;
+  font: 500 11px/1.6 "Geist Mono", monospace;
+}
+.etranslink-proof {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: var(--paper);
+  background:
+    linear-gradient(rgba(7,23,16,.62), rgba(7,23,16,.82)),
+    url("/images/etranslink/logistics-truck.jpg") center/cover;
+}
+.etranslink-proof > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: .38;
+}
+.etranslink-proof > div { position: relative; z-index: 1; text-align: center; }
+.etranslink-proof strong { font-size: clamp(34px, 5vw, 70px); letter-spacing: -.08em; }
+.etranslink-proof strong span { color: #ccff00; }
+.etranslink-proof small { margin-top: 12px; font: 600 9px "Geist Mono", monospace; letter-spacing: .2em; }
+
 .eyebrow,
 .section-code,
 .case-meta,
@@ -497,6 +565,7 @@ img { max-width: 100%; display: block; }
   .crm-sidebar { display: none; }
   .crm-metrics { grid-template-columns: repeat(2, 1fr); }
   .pipeline { overflow-x: auto; }
+  .etranslink-stories { grid-template-columns: 1fr; }
   .capability-grid { grid-template-columns: repeat(2, 1fr); }
   .architecture-map { grid-template-columns: 1fr; }
   .architecture-node { border-right: 1px solid rgba(8,8,8,.25); border-bottom: 0; }
@@ -519,6 +588,7 @@ img { max-width: 100%; display: block; }
   .capability-grid { grid-template-columns: 1fr; }
   .crm-dashboard { padding: 14px; }
   .crm-metrics { grid-template-columns: 1fr 1fr; }
+  .etranslink-stories article { min-height: 135px; }
   .proof-photo { min-height: 430px; }
 }
 

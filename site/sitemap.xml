@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://matheuslibonatti.tech/pt-br/</loc>
+    <lastmod>2026-07-26</lastmod>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://matheuslibonatti.tech/pt-br/" />
+    <xhtml:link rel="alternate" hreflang="es-419" href="https://matheuslibonatti.tech/es/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://matheuslibonatti.tech/en/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://matheuslibonatti.tech/pt-br/" />
+  </url>
+  <url>
+    <loc>https://matheuslibonatti.tech/es/</loc>
+    <lastmod>2026-07-26</lastmod>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://matheuslibonatti.tech/pt-br/" />
+    <xhtml:link rel="alternate" hreflang="es-419" href="https://matheuslibonatti.tech/es/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://matheuslibonatti.tech/en/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://matheuslibonatti.tech/pt-br/" />
+  </url>
+  <url>
+    <loc>https://matheuslibonatti.tech/en/</loc>
+    <lastmod>2026-07-26</lastmod>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://matheuslibonatti.tech/pt-br/" />
+    <xhtml:link rel="alternate" hreflang="es-419" href="https://matheuslibonatti.tech/es/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://matheuslibonatti.tech/en/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://matheuslibonatti.tech/pt-br/" />
+  </url>
+  <url>
+    <loc>https://matheuslibonatti.tech/pt-br/blog/</loc>
+    <lastmod>2026-07-26</lastmod>
+  </url>
+  <url>
+    <loc>https://matheuslibonatti.tech/es/blog/</loc>
+    <lastmod>2026-07-26</lastmod>
+  </url>
+  <url>
+    <loc>https://matheuslibonatti.tech/en/blog/</loc>
+    <lastmod>2026-07-26</lastmod>
+  </url>
+  <url>
+    <loc>https://matheuslibonatti.tech/pt-br/projetos/nogueira-cardiologia/</loc>
+    <lastmod>2026-07-26</lastmod>
+  </url>
+  <url>
+    <loc>https://matheuslibonatti.tech/es/proyectos/nogueira-cardiologia/</loc>
+    <lastmod>2026-07-26</lastmod>
+  </url>
+  <url>
+    <loc>https://matheuslibonatti.tech/en/projects/nogueira-cardiologia/</loc>
+    <lastmod>2026-07-26</lastmod>
+  </url>
+  <url>
+    <loc>https://matheuslibonatti.tech/pt-br/projetos/tripoli/</loc>
+    <lastmod>2026-07-26</lastmod>
+  </url>
+  <url>
+    <loc>https://matheuslibonatti.tech/es/proyectos/tripoli/</loc>
+    <lastmod>2026-07-26</lastmod>
+  </url>
+  <url>
+    <loc>https://matheuslibonatti.tech/en/projects/tripoli/</loc>
+    <lastmod>2026-07-26</lastmod>
+  </url>
+  <url>
+    <loc>https://matheuslibonatti.tech/pt-br/projetos/etranslink/</loc>
+    <lastmod>2026-07-26</lastmod>
+  </url>
+  <url>
+    <loc>https://matheuslibonatti.tech/es/proyectos/etranslink/</loc>
+    <lastmod>2026-07-26</lastmod>
+  </url>
+  <url>
+    <loc>https://matheuslibonatti.tech/en/projects/etranslink/</loc>
+    <lastmod>2026-07-26</lastmod>
+  </url>
+</urlset>

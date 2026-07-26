@@ -9,13 +9,13 @@
   </p>
 
   <p>
-    <a href="http://46.202.151.198:8080/pt-br/"><strong>Ver o site</strong></a>
+    <a href="https://matheuslibonatti.tech/pt-br/"><strong>Ver o site</strong></a>
     ·
-    <a href="http://46.202.151.198:8080/pt-br/blog/">Blog PT-BR</a>
+    <a href="https://matheuslibonatti.tech/pt-br/blog/">Blog PT-BR</a>
     ·
-    <a href="http://46.202.151.198:8080/es/blog/">Blog ES-LATAM</a>
+    <a href="https://matheuslibonatti.tech/es/blog/">Blog ES-LATAM</a>
     ·
-    <a href="http://46.202.151.198:8080/en/blog/">Blog EN</a>
+    <a href="https://matheuslibonatti.tech/en/blog/">Blog EN</a>
   </p>
 </div>
 
@@ -50,10 +50,16 @@ Cada versão possui uma URL própria. As páginas utilizam `hreflang` para ajuda
 - Blog de tecnologia nos três idiomas.
 - Primeiro artigo editorial completo.
 - Catálogo comercial com cases localizados.
+- Case Etranslink: inteligência e conexão para a logística sul-americana.
+- Case Tripoli: ecossistema digital para investimentos e educação financeira.
 - Case Nogueira Cardiologia: plataforma SaaS para saúde com CRM próprio.
+- Contato por LinkedIn, GitHub, WhatsApp e e-mail.
+- Escritórios no Brasil e nos Estados Unidos com mapas e dados estruturados.
+- Consentimento de cookies e localização com seleção inteligente de idioma.
+- SEO técnico com sitemap, robots, dados estruturados, `hreflang` e `llms.txt`.
 - Navegação acessível e menu adaptado para dispositivos móveis.
 - Rotas localizadas servidas por Nginx.
-- Deploy em contêiner Docker.
+- Deploy em contêiner Docker, proxy Caddy e HTTPS automático.
 - Redirecionamentos compatíveis com rotas anteriores.
 
 ## Arquitetura
@@ -65,6 +71,10 @@ libonatti-software-system/
 │       ├── README.md          # Manual da identidade visual
 │       ├── logo-mark.svg      # Símbolo compacto ML
 │       ├── logo-primary.svg   # Assinatura principal
+│       ├── colors.md           # Paleta e contraste
+│       ├── typography.md       # Família e hierarquia tipográfica
+│       ├── logo-usage.md       # Regras de aplicação da marca
+│       ├── components.md       # Padrões de interface
 │       └── tokens.css         # Cores, fontes, espaços e movimento
 │   └── catalog/
 │       └── README.md          # Padrão para os próximos cases
@@ -76,9 +86,13 @@ libonatti-software-system/
 │   ├── case.css               # Sistema visual dos cases
 │   ├── case.js                # Interações compartilhadas
 │   ├── projects/              # Cases completos em PT, ES e EN
+│   ├── robots.txt              # Políticas para mecanismos de busca
+│   ├── sitemap.xml             # Índice de URLs públicas
+│   ├── llms.txt                # Contexto para ferramentas de IA
 │   ├── styles.css             # Sistema visual da interface
 │   ├── nginx.conf             # Rotas e redirecionamentos
 │   └── Dockerfile             # Imagem de produção
+├── Caddyfile                   # Domínio, HTTPS e proxy reverso
 └── README.md
 ```
 
@@ -119,13 +133,16 @@ O manual completo, arquivos de logo e tokens reutilizáveis estão em [`docs/bra
 3. **Performance é experiência** — velocidade, acessibilidade e confiabilidade fazem parte do design.
 4. **Construído para evoluir** — arquitetura e conteúdo devem crescer sem perder consistência.
 
-## Próximos passos
+## Produção
 
-- conectar o domínio oficial e certificados HTTPS;
-- adicionar URLs canônicas e sitemap com o domínio definitivo;
+O domínio oficial é [`matheuslibonatti.tech`](https://matheuslibonatti.tech/). O Nginx serve o site estático no contêiner e o Caddy encerra HTTPS e encaminha o tráfego para a aplicação.
+
+## Evolução
+
 - publicar novos artigos técnicos;
-- substituir os placeholders pelos cases e imagens finais;
-- incluir métricas de performance e resultados dos projetos.
+- adicionar novos cases com contexto, decisões e resultados mensuráveis;
+- acompanhar Core Web Vitals, indexação e conversões;
+- evoluir o catálogo sem quebrar as URLs localizadas existentes.
 
 ---
 

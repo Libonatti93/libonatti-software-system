@@ -70,6 +70,11 @@ document.querySelectorAll("[data-copy]").forEach((element) => {
   if (copy[element.dataset.copy]) element.textContent = copy[element.dataset.copy];
 });
 const locale = { pt: "pt-br", es: "es", en: "en" }[blogLanguage];
+const canonical = `https://matheuslibonatti.tech/${locale}/blog/`;
+document.querySelector("#canonical-url").href = canonical;
+document.querySelector("#og-title").content = copy.titleTag;
+document.querySelector("#og-description").content = copy.description;
+document.querySelector("#og-url").content = canonical;
 document.querySelectorAll("[data-home]").forEach((link) => link.href = `/${locale}/`);
 document.querySelector(`[data-lang="${blogLanguage}"]`).setAttribute("aria-current", "page");
 document.querySelector("#year").textContent = new Date().getFullYear();

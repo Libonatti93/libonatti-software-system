@@ -1,0 +1,28 @@
+# Matheus Libonatti
+
+> Official portfolio of Matheus Libonatti, a Brazilian software engineer and full-stack developer serving Brazil, Latin America, and remote teams.
+
+Matheus designs and builds digital products, web platforms, APIs, integrations, automation, artificial intelligence workflows, SaaS products, databases, and scalable software architecture.
+
+## Main pages
+
+- [Português](https://matheuslibonatti.tech/pt-br/): Perfil, serviços, projetos e contato em português.
+- [Español](https://matheuslibonatti.tech/es/): Perfil, servicios, proyectos y contacto en español.
+- [English](https://matheuslibonatti.tech/en/): Profile, services, projects, and contact in English.
+- [Technology blog](https://matheuslibonatti.tech/en/blog/): Articles about software engineering, AI, web development, and technical decisions.
+
+## Selected work
+
+- [Nogueira Cardiologia](https://matheuslibonatti.tech/en/projects/nogueira-cardiologia/): A healthcare SaaS platform connecting acquisition, patients, appointments, payments, exams, and a custom CRM.
+- [Tripoli Investimentos](https://matheuslibonatti.tech/en/projects/tripoli/): Financial UX/UI, SEO, CRM, simulations, consultative service, and a multi-solution sales pipeline.
+- [Etranslink](https://matheuslibonatti.tech/en/projects/etranslink/): An editorial and logistics intelligence platform connecting shippers, carriers, industry, agribusiness, and foreign trade.
+
+## Identity
+
+- Name: Matheus Libonatti
+- Role: Software Engineer and Full-Stack Developer
+- Region: Brazil and Latin America
+- Languages: Portuguese, Spanish, English
+- GitHub: https://github.com/Libonatti93
+
+Canonical website: https://matheuslibonatti.tech/
