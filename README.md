@@ -53,6 +53,7 @@ Cada versão possui uma URL própria. As páginas utilizam `hreflang` para ajuda
 - Case Etranslink: inteligência e conexão para a logística sul-americana.
 - Case Tripoli: ecossistema digital para investimentos e educação financeira.
 - Case Nogueira Cardiologia: plataforma SaaS para saúde com CRM próprio.
+- Case LIOS: motor proprietário de inteligência, automação, RAG e descoberta orgânica.
 - Contato por LinkedIn, GitHub, WhatsApp e e-mail.
 - Escritórios no Brasil e nos Estados Unidos com mapas e dados estruturados.
 - Consentimento de cookies e localização com seleção inteligente de idioma.

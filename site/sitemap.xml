@@ -71,6 +71,30 @@
   </url>
   <url>
     <loc>https://matheuslibonatti.tech/en/projects/etranslink/</loc>
-    <lastmod>2026-07-26</lastmod>
+    <lastmod>2026-07-27</lastmod>
+  </url>
+  <url>
+    <loc>https://matheuslibonatti.tech/pt-br/projetos/lios/</loc>
+    <lastmod>2026-07-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://matheuslibonatti.tech/pt-br/projetos/lios/" />
+    <xhtml:link rel="alternate" hreflang="es-419" href="https://matheuslibonatti.tech/es/proyectos/lios/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://matheuslibonatti.tech/en/projects/lios/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://matheuslibonatti.tech/pt-br/projetos/lios/" />
+  </url>
+  <url>
+    <loc>https://matheuslibonatti.tech/es/proyectos/lios/</loc>
+    <lastmod>2026-07-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://matheuslibonatti.tech/pt-br/projetos/lios/" />
+    <xhtml:link rel="alternate" hreflang="es-419" href="https://matheuslibonatti.tech/es/proyectos/lios/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://matheuslibonatti.tech/en/projects/lios/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://matheuslibonatti.tech/pt-br/projetos/lios/" />
+  </url>
+  <url>
+    <loc>https://matheuslibonatti.tech/en/projects/lios/</loc>
+    <lastmod>2026-07-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://matheuslibonatti.tech/pt-br/projetos/lios/" />
+    <xhtml:link rel="alternate" hreflang="es-419" href="https://matheuslibonatti.tech/es/proyectos/lios/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://matheuslibonatti.tech/en/projects/lios/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://matheuslibonatti.tech/pt-br/projetos/lios/" />
   </url>
 </urlset>
