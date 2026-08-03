@@ -256,6 +256,89 @@ Transformar notícias econômicas, políticas, rodoviárias, tecnológicas e log
   updatedAt: new Date().toISOString()
 };
 
+const cesarDomains = [
+  ["fundamentos-lios", "Fundamentos LIOS", "princípios que orientam inteligência, memória, contexto e ação", ["arquitetura", "inteligencia"]],
+  ["rag", "RAG e recuperação", "recuperação contextual, chunking, ranking e respostas ancoradas", ["rag", "busca-semantica"]],
+  ["vetores", "Vetores e embeddings", "representação vetorial, similaridade e organização semântica", ["vetores", "embeddings"]],
+  ["agentes", "Agentes de IA", "papéis, ferramentas, memória, limites e colaboração entre agentes", ["agentes", "ia"]],
+  ["automacao", "Automação inteligente", "gatilhos, filas, idempotência, observabilidade e execução confiável", ["automacao", "workflows"]],
+  ["engenharia", "Engenharia de software", "código sustentável, contratos, testes, versionamento e evolução", ["engenharia", "software"]],
+  ["dados", "Dados e conhecimento", "qualidade, proveniência, modelos, metadados e governança", ["dados", "conhecimento"]],
+  ["seguranca", "Segurança e privacidade", "autenticação, autorização, segredos, auditoria e proteção de dados", ["seguranca", "privacidade"]],
+  ["produto", "Produto e experiência", "problemas reais, jornadas, feedback, métricas e decisões de produto", ["produto", "ux"]],
+  ["conteudo", "Conteúdo e descoberta", "pesquisa, autoridade, SEO, distribuição e utilidade editorial", ["conteudo", "seo"]],
+  ["infraestrutura", "Infraestrutura e operação", "Docker, redes, proxy, disponibilidade, logs e recuperação", ["infraestrutura", "devops"]],
+  ["estrategia", "Estratégia tecnológica", "priorização, custos, riscos, diferenciação e construção de ativos", ["estrategia", "tecnologia"]]
+];
+
+const cesarAspects = [
+  ["conceito", "Conceito central", "Defina o conceito em linguagem clara, registre por que ele importa e conecte-o à arquitetura do LIOS."],
+  ["principios", "Princípios de decisão", "Liste os princípios que ajudam a escolher caminhos sem perder clareza, segurança ou valor para o usuário."],
+  ["arquitetura", "Arquitetura de referência", "Descreva componentes, responsabilidades, entradas, saídas e fronteiras que mantêm o sistema evolutivo."],
+  ["implementacao", "Implementação prática", "Transforme a ideia em passos pequenos, verificáveis e versionáveis, com critérios objetivos de conclusão."],
+  ["qualidade", "Qualidade e validação", "Defina testes, sinais de confiança e evidências necessárias antes de considerar o conhecimento pronto para uso."],
+  ["riscos", "Riscos e limites", "Registre falhas prováveis, custos ocultos, dependências e situações que exigem aprovação humana."],
+  ["metricas", "Métricas e observação", "Escolha medidas que indiquem utilidade, saúde, custo, velocidade e impacto sem criar números cenográficos."],
+  ["evolucao", "Evolução futura", "Mapeie próximos experimentos, conexões com outras áreas e perguntas que o Cesar deve continuar investigando."]
+];
+
+function localVector(text, dimensions = 32) {
+  const vector = Array(dimensions).fill(0);
+  const words = String(text).normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLocaleLowerCase("pt-BR").match(/[a-z0-9]{3,}/g) || [];
+  for (const word of words) {
+    let hash = 2166136261;
+    for (const character of word) hash = Math.imul(hash ^ character.charCodeAt(0), 16777619);
+    vector[Math.abs(hash) % dimensions] += hash & 1 ? 1 : -1;
+  }
+  const norm = Math.hypot(...vector) || 1;
+  return vector.map((value) => Number((value / norm).toFixed(5)));
+}
+
+function vectorSimilarity(a = [], b = []) {
+  return a.reduce((score, value, index) => score + value * (b[index] || 0), 0);
+}
+
+function cesarSeedNotes() {
+  const createdAt = new Date().toISOString();
+  return cesarDomains.flatMap(([domainId, domainTitle, description, domainTags], domainIndex) =>
+    cesarAspects.map(([aspectId, aspectTitle, guidance], aspectIndex) => {
+      const title = `${domainTitle} · ${aspectTitle}`;
+      const body = `${domainTitle} reúne ${description}. ${guidance}\n\nAplicação no Cesar: esta memória deve se conectar às demais notas por significado e tags, oferecendo contexto recuperável para decisões, pesquisas, automações e agentes do ecossistema LIOS.\n\nPergunta viva: como transformar este conhecimento em uma ação útil, rastreável e segura?`;
+      const tags = ["cesar", "lios", domainId, aspectId, ...domainTags, cesarDomains[(domainIndex + aspectIndex + 1) % cesarDomains.length][0]];
+      return {
+        id: `cesar-${domainId}-${aspectId}`,
+        seedVersion: 1,
+        title,
+        body,
+        tags: [...new Set(tags)],
+        createdAt,
+        updatedAt: createdAt
+      };
+    })
+  );
+}
+
+function connectCesarNotes(notes) {
+  const enriched = notes.map((note) => ({
+    ...note,
+    vector: localVector([note.title, note.body, ...(note.tags || [])].join(" "))
+  }));
+  return enriched.map((note) => {
+    const noteTags = new Set(note.tags || []);
+    const relatedIds = enriched
+      .filter((candidate) => candidate.id !== note.id)
+      .map((candidate) => ({
+        id: candidate.id,
+        score: vectorSimilarity(note.vector, candidate.vector)
+          + (candidate.tags || []).filter((tag) => noteTags.has(tag)).length * .18
+      }))
+      .sort((a, b) => b.score - a.score)
+      .slice(0, 5)
+      .map((candidate) => candidate.id);
+    return { ...note, relatedIds };
+  });
+}
+
 const defaultState = {
   version: 1,
   createdAt: new Date().toISOString(),
@@ -363,6 +446,12 @@ if (avatarNoteIndex === -1) {
   };
   await persist();
 }
+
+const existingNoteIds = new Set(state.notes.map((note) => note.id));
+const missingCesarNotes = cesarSeedNotes().filter((note) => !existingNoteIds.has(note.id));
+if (missingCesarNotes.length) state.notes.push(...missingCesarNotes);
+state.notes = connectCesarNotes(state.notes);
+if (missingCesarNotes.length || state.notes.some((note) => !note.vector || !note.relatedIds)) await persist();
 
 function persist() {
   persistQueue = persistQueue.then(async () => {
@@ -1008,11 +1097,12 @@ const server = http.createServer(async (req, res) => {
           updatedAt: new Date().toISOString()
         };
         state.notes.unshift(note);
+        state.notes = connectCesarNotes(state.notes);
         await persist();
         sendJson(res, 201, { note });
         return;
       }
-      const noteMatch = pathname.match(/^\/api\/notes\/([a-f0-9]+|welcome)$/);
+      const noteMatch = pathname.match(/^\/api\/notes\/([a-z0-9-]+)$/);
       if (noteMatch && req.method === "DELETE") {
         const before = state.notes.length;
         state.notes = state.notes.filter((note) => note.id !== noteMatch[1]);
@@ -1020,6 +1110,7 @@ const server = http.createServer(async (req, res) => {
           sendJson(res, 404, { error: "Nota não encontrada." });
           return;
         }
+        state.notes = connectCesarNotes(state.notes);
         await persist();
         sendJson(res, 200, { ok: true });
         return;

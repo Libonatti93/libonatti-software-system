@@ -188,6 +188,18 @@ button { color: inherit; cursor: pointer; }
 .workflow-run button { margin-top: 10px; border: 0; background: var(--lime); color: var(--ink); padding: 12px 16px; font-weight: 800; }
 
 .brain-toolbar { margin: 28px 0 12px; display: flex; align-items: end; justify-content: space-between; gap: 15px; }
+.cesar-knowledge-map { position: relative; height: min(62vh, 620px); min-height: 430px; margin-top: 28px; overflow: hidden; background: radial-gradient(circle at 50% 50%, #252b13 0, #11130d 30%, #090909 72%); }
+.cesar-knowledge-map::before { content: ""; position: absolute; inset: 0; opacity: .12; background-image: radial-gradient(#d9ff43 1px, transparent 1px); background-size: 26px 26px; mask-image: radial-gradient(circle, #000 15%, transparent 78%); }
+#cesar-map-canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+.cesar-map-head { position: absolute; z-index: 2; top: 22px; left: 24px; right: 24px; display: flex; justify-content: space-between; align-items: start; pointer-events: none; }
+.cesar-map-head span { color: var(--lime); font: 700 9px var(--mono); letter-spacing: .15em; }
+.cesar-map-head h3 { margin: 7px 0 0; font-size: 19px; }
+.cesar-map-head > b { padding: 8px 10px; border: 1px solid #d9ff4355; color: var(--lime); background: #0b0d09cc; font: 700 8px var(--mono); letter-spacing: .1em; }
+.cesar-map-stats { position: absolute; z-index: 2; left: 24px; right: 24px; bottom: 20px; display: flex; gap: 20px; pointer-events: none; color: #777d6e; font: 700 8px var(--mono); letter-spacing: .11em; }
+.cesar-map-stats b { color: var(--paper); font-size: 10px; }
+.cesar-map-stats i { display: inline-block; width: 6px; height: 6px; margin-right: 6px; border-radius: 50%; background: var(--lime); box-shadow: 0 0 10px var(--lime); }
+.cesar-map-tooltip { position: absolute; z-index: 3; max-width: 260px; padding: 10px 12px; border: 1px solid #d9ff4366; background: #090b08ee; color: var(--paper); font-size: 11px; line-height: 1.4; pointer-events: none; backdrop-filter: blur(8px); }
+.cesar-map-tooltip b { display: block; margin-bottom: 4px; color: var(--lime); font: 700 8px var(--mono); letter-spacing: .1em; }
 .brain-toolbar label { width: min(540px, 100%); }
 .brain-toolbar label span { display: block; margin-bottom: 8px; color: #748b7e; font: 700 9px var(--mono); letter-spacing: .12em; }
 .brain-toolbar button, #new-note { height: 48px; border: 0; background: var(--lime); color: var(--ink); padding: 0 18px; font-weight: 800; }
@@ -323,6 +335,8 @@ td:first-child { color: var(--paper); font-weight: 700; }
   .metric-grid { grid-template-columns: 1fr; }
   .workflow-detail, .brain-layout, .note-grid { grid-template-columns: 1fr; }
   .brain-toolbar { align-items: stretch; flex-direction: column; }
+  .cesar-knowledge-map { min-height: 480px; }
+  .cesar-map-stats { gap: 10px; flex-wrap: wrap; }
   .agent-roadmap ol { grid-template-columns: 1fr; }
   .agent-metrics { grid-template-columns: 1fr 1fr; }
   .agent-roadmap li { border-right: 0; border-bottom: 1px solid var(--line); }

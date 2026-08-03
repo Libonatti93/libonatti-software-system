@@ -8,7 +8,9 @@ const state = {
   agentInfo: null,
   radar: null,
   radarFilter: "todos",
-  events: null
+  events: null,
+  cesarFrame: 0,
+  cesarMapAbort: null
 };
 
 const $ = (selector, context = document) => context.querySelector(selector);
@@ -315,6 +317,7 @@ async function refreshWorkflows() {
 }
 
 function renderNotes() {
+  renderCesarMap();
   $("#note-grid").innerHTML = state.notes.length ? state.notes.map((note) => `
     <article class="note-card">
       <h3>${esc(note.title)}</h3>
@@ -333,6 +336,146 @@ function renderNotes() {
       toast(error.message);
     }
   }));
+}
+
+function renderCesarMap() {
+  const canvas = $("#cesar-map-canvas");
+  if (!canvas) return;
+  window.cancelAnimationFrame(state.cesarFrame);
+  state.cesarMapAbort?.abort();
+  state.cesarMapAbort = new AbortController();
+  const { signal } = state.cesarMapAbort;
+  const context = canvas.getContext("2d");
+  const tooltip = $("#cesar-map-tooltip");
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const palette = ["217,255,67", "156,124,255", "242,241,237", "255,77,0", "109,225,232"];
+  const notes = state.notes.map((note, index) => {
+    const vector = Array.isArray(note.vector) ? note.vector : [];
+    const angle = index * 2.39996 + (vector[0] || 0) * 2;
+    const radius = 80 + Math.sqrt(index + 1) * 30 + Math.abs(vector[1] || 0) * 100;
+    return {
+      ...note,
+      x: Math.cos(angle) * radius,
+      y: Math.sin(angle) * radius * .68,
+      z: (vector[2] || Math.sin(angle * 1.4)) * 240,
+      size: 1.8 + Math.min(5, (note.relatedIds || []).length) * .42,
+      color: Math.abs(Math.round((vector[3] || index) * 1000)) % palette.length,
+      phase: angle
+    };
+  });
+  const byId = new Map(notes.map((note, index) => [note.id, index]));
+  const linkKeys = new Set();
+  const links = [];
+  notes.forEach((note, from) => (note.relatedIds || []).forEach((relatedId) => {
+    const to = byId.get(relatedId);
+    if (to == null) return;
+    const key = [from, to].sort((a, b) => a - b).join(":");
+    if (linkKeys.has(key)) return;
+    linkKeys.add(key);
+    links.push([from, to]);
+  }));
+  $("#cesar-node-count").textContent = notes.length;
+  $("#cesar-link-count").textContent = links.length;
+  $("#cesar-map-status").textContent = notes.length ? "VETORES CONECTADOS" : "BASE VAZIA";
+
+  let width = 0;
+  let height = 0;
+  let ratio = 1;
+  let projected = [];
+  let pointer = { x: -1000, y: -1000 };
+
+  function resize() {
+    const bounds = canvas.getBoundingClientRect();
+    ratio = Math.min(window.devicePixelRatio || 1, 2);
+    width = bounds.width;
+    height = bounds.height;
+    canvas.width = Math.max(1, Math.round(width * ratio));
+    canvas.height = Math.max(1, Math.round(height * ratio));
+    context.setTransform(ratio, 0, 0, ratio, 0, 0);
+  }
+
+  function project(note, time) {
+    const rotation = reducedMotion ? 0 : time * .000025;
+    const cos = Math.cos(rotation);
+    const sin = Math.sin(rotation);
+    const px = note.x * cos - note.z * sin;
+    const depth = note.x * sin + note.z * cos;
+    const perspective = 600 / (760 + depth);
+    return {
+      x: width * .5 + px * perspective,
+      y: height * .52 + note.y * perspective + Math.sin(time * .00025 + note.phase) * 4,
+      depth,
+      scale: Math.max(.38, perspective)
+    };
+  }
+
+  function draw(time) {
+    context.clearRect(0, 0, width, height);
+    projected = notes.map((note) => project(note, time));
+    links.forEach(([from, to], index) => {
+      const a = projected[from];
+      const b = projected[to];
+      context.beginPath();
+      context.moveTo(a.x, a.y);
+      context.lineTo(b.x, b.y);
+      context.strokeStyle = `rgba(${palette[notes[from].color]},${Math.max(.04, .16 - (a.depth + b.depth) / 4000)})`;
+      context.lineWidth = .55;
+      context.stroke();
+      if (!reducedMotion && index % 5 === 0) {
+        const progress = (time * .000025 + index * .091) % 1;
+        const x = a.x + (b.x - a.x) * progress;
+        const y = a.y + (b.y - a.y) * progress;
+        context.beginPath();
+        context.arc(x, y, 1.1, 0, Math.PI * 2);
+        context.fillStyle = `rgba(${palette[notes[from].color]},.8)`;
+        context.fill();
+      }
+    });
+    notes.map((note, index) => ({ note, point: projected[index], index }))
+      .sort((a, b) => b.point.depth - a.point.depth)
+      .forEach(({ note, point }) => {
+        const hovered = Math.hypot(pointer.x - point.x, pointer.y - point.y) < note.size * point.scale + 7;
+        const radius = note.size * point.scale * (hovered ? 1.8 : 1);
+        context.beginPath();
+        context.arc(point.x, point.y, radius + (hovered ? 8 : 3), 0, Math.PI * 2);
+        context.fillStyle = `rgba(${palette[note.color]},${hovered ? .16 : .05})`;
+        context.fill();
+        context.beginPath();
+        context.arc(point.x, point.y, radius, 0, Math.PI * 2);
+        context.fillStyle = `rgba(${palette[note.color]},${hovered ? 1 : .78})`;
+        context.shadowColor = `rgba(${palette[note.color]},.8)`;
+        context.shadowBlur = hovered ? 18 : 7;
+        context.fill();
+        context.shadowBlur = 0;
+      });
+    state.cesarFrame = window.requestAnimationFrame(draw);
+  }
+
+  function updateTooltip(event) {
+    const bounds = canvas.getBoundingClientRect();
+    pointer = { x: event.clientX - bounds.left, y: event.clientY - bounds.top };
+    let closest = null;
+    notes.forEach((note, index) => {
+      const point = projected[index];
+      if (!point) return;
+      const distance = Math.hypot(pointer.x - point.x, pointer.y - point.y);
+      if (distance < 14 && (!closest || distance < closest.distance)) closest = { note, distance };
+    });
+    if (!closest) {
+      tooltip.hidden = true;
+      return;
+    }
+    tooltip.innerHTML = `<b>CESAR · MEMÓRIA</b>${esc(closest.note.title)}`;
+    tooltip.style.left = `${Math.min(width - 270, pointer.x + 15)}px`;
+    tooltip.style.top = `${Math.max(70, pointer.y - 8)}px`;
+    tooltip.hidden = false;
+  }
+
+  resize();
+  window.addEventListener("resize", resize, { passive: true, signal });
+  canvas.addEventListener("mousemove", updateTooltip, { passive: true, signal });
+  canvas.addEventListener("mouseleave", () => { pointer = { x: -1000, y: -1000 }; tooltip.hidden = true; }, { signal });
+  state.cesarFrame = window.requestAnimationFrame(draw);
 }
 
 async function searchNotes(query) {
@@ -457,6 +600,7 @@ function route(name) {
     agents: "Agentes IA",
     audit: "Operação"
   }[name];
+  if (name === "brain") renderCesarMap();
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 

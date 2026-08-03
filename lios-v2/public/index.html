@@ -6,8 +6,8 @@
     <meta name="theme-color" content="#080808" />
     <meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
     <title>ML Central · Matheus Libonatti</title>
-    <link rel="stylesheet" href="/app.css?v=10" />
-    <script src="/app.js?v=10" defer></script>
+    <link rel="stylesheet" href="/app.css?v=11" />
+    <script src="/app.js?v=11" defer></script>
   </head>
   <body>
     <div class="login-shell" id="login-shell">
@@ -142,6 +142,12 @@
             <div><span>CESAR · SECOND BRAIN</span><h2>Conhecimento conectado.<br /><em>Contexto que fica.</em></h2></div>
             <p>Cesar organiza notas, decisões e contexto na sua própria VPS — uma memória privada preparada para conectar ideias e apoiar suas próximas ações.</p>
           </div>
+          <article class="cesar-knowledge-map panel">
+            <canvas id="cesar-map-canvas" aria-label="Grafo vivo das memórias conectadas do Cesar"></canvas>
+            <div class="cesar-map-head"><div><span>RAG · BASE VETORIAL LOCAL</span><h3>Mapa vivo do conhecimento</h3></div><b id="cesar-map-status">CARREGANDO</b></div>
+            <div class="cesar-map-stats"><span><b id="cesar-node-count">0</b> NOTAS</span><span><b id="cesar-link-count">0</b> CONEXÕES</span><span><i></i> AO VIVO</span></div>
+            <div class="cesar-map-tooltip" id="cesar-map-tooltip" hidden></div>
+          </article>
           <div class="brain-toolbar">
             <label><span>BUSCAR NO CESAR</span><input id="note-search" type="search" placeholder="Tema, decisão ou tag…" /></label>
             <button id="new-note">+ Nova nota</button>
