@@ -522,6 +522,132 @@ window.setInterval(() => {
   }).format(new Date());
 }, 1000);
 
+function initBrainGraph() {
+  const canvas = $("#brain-canvas");
+  if (!canvas) return;
+  const context = canvas.getContext("2d");
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const colors = ["217,255,67", "156,124,255", "242,241,237", "255,77,0"];
+  const nodes = Array.from({ length: reducedMotion ? 44 : 86 }, (_, index) => {
+    const cluster = index % 5;
+    const angle = index * 2.39996 + cluster * .7;
+    const radius = 76 + Math.sqrt(index + 1) * 27 + (cluster % 2) * 30;
+    return {
+      x: Math.cos(angle) * radius,
+      y: Math.sin(angle) * radius * .72,
+      z: Math.sin(angle * 1.7) * 145,
+      size: index < 9 ? 2.7 + (index % 3) : .8 + (index % 5) * .38,
+      cluster,
+      phase: Math.random() * Math.PI * 2,
+      speed: .0007 + Math.random() * .0011
+    };
+  });
+  const links = [];
+  nodes.forEach((node, index) => {
+    if (index < 5) links.push([index, (index + 1) % 5]);
+    if (index > 4) {
+      links.push([index, index % 5]);
+      links.push([index, Math.max(0, index - 4 - (index % 7))]);
+      if (index % 3 === 0) links.push([index, Math.max(0, index - 11)]);
+    }
+  });
+  let width = 0;
+  let height = 0;
+  let ratio = 1;
+  let frame = 0;
+
+  function resize() {
+    const bounds = canvas.getBoundingClientRect();
+    ratio = Math.min(window.devicePixelRatio || 1, 2);
+    width = bounds.width;
+    height = bounds.height;
+    canvas.width = Math.max(1, Math.round(width * ratio));
+    canvas.height = Math.max(1, Math.round(height * ratio));
+    context.setTransform(ratio, 0, 0, ratio, 0, 0);
+  }
+
+  function project(node, time) {
+    const rotation = time * node.speed + node.phase * .04;
+    const cos = Math.cos(rotation);
+    const sin = Math.sin(rotation);
+    const px = node.x * cos - node.z * sin;
+    const depth = node.x * sin + node.z * cos;
+    const perspective = 520 / (620 + depth);
+    return {
+      x: width * .52 + px * perspective,
+      y: height * .48 + node.y * perspective + Math.sin(time * .0007 + node.phase) * 7,
+      depth,
+      scale: Math.max(.35, perspective)
+    };
+  }
+
+  function draw(time) {
+    context.clearRect(0, 0, width, height);
+    const projected = nodes.map((node) => project(node, time));
+    const glow = context.createRadialGradient(width * .52, height * .48, 0, width * .52, height * .48, Math.min(width, height) * .48);
+    glow.addColorStop(0, "rgba(217,255,67,.075)");
+    glow.addColorStop(.45, "rgba(156,124,255,.025)");
+    glow.addColorStop(1, "rgba(0,0,0,0)");
+    context.fillStyle = glow;
+    context.fillRect(0, 0, width, height);
+
+    links.forEach(([from, to], linkIndex) => {
+      const a = projected[from];
+      const b = projected[to];
+      const depthAlpha = Math.max(.035, Math.min(.24, .16 - (a.depth + b.depth) / 2800));
+      context.beginPath();
+      context.moveTo(a.x, a.y);
+      context.lineTo(b.x, b.y);
+      context.strokeStyle = `rgba(${colors[nodes[from].cluster % colors.length]},${depthAlpha})`;
+      context.lineWidth = linkIndex % 7 === 0 ? .85 : .45;
+      context.stroke();
+      if (!reducedMotion && linkIndex % 4 === 0) {
+        const travel = (time * .00016 + linkIndex * .137) % 1;
+        const x = a.x + (b.x - a.x) * travel;
+        const y = a.y + (b.y - a.y) * travel;
+        context.beginPath();
+        context.arc(x, y, linkIndex % 8 === 0 ? 1.8 : 1, 0, Math.PI * 2);
+        context.fillStyle = `rgba(${colors[nodes[from].cluster % colors.length]},.9)`;
+        context.shadowColor = `rgba(${colors[nodes[from].cluster % colors.length]},1)`;
+        context.shadowBlur = 8;
+        context.fill();
+        context.shadowBlur = 0;
+      }
+    });
+
+    nodes.map((node, index) => ({ node, point: projected[index] }))
+      .sort((a, b) => b.point.depth - a.point.depth)
+      .forEach(({ node, point }) => {
+        const pulse = 1 + Math.sin(time * .002 + node.phase) * .22;
+        const radius = node.size * point.scale * pulse;
+        const alpha = Math.max(.28, Math.min(.95, .72 - point.depth / 900));
+        context.beginPath();
+        context.arc(point.x, point.y, radius + 3, 0, Math.PI * 2);
+        context.fillStyle = `rgba(${colors[node.cluster % colors.length]},.06)`;
+        context.fill();
+        context.beginPath();
+        context.arc(point.x, point.y, radius, 0, Math.PI * 2);
+        context.fillStyle = `rgba(${colors[node.cluster % colors.length]},${alpha})`;
+        context.shadowColor = `rgba(${colors[node.cluster % colors.length]},.7)`;
+        context.shadowBlur = node.size > 2 ? 13 : 5;
+        context.fill();
+        context.shadowBlur = 0;
+      });
+
+    frame = window.requestAnimationFrame(draw);
+  }
+
+  resize();
+  window.addEventListener("resize", resize, { passive: true });
+  frame = window.requestAnimationFrame(draw);
+  document.addEventListener("visibilitychange", () => {
+    window.cancelAnimationFrame(frame);
+    if (!document.hidden) frame = window.requestAnimationFrame(draw);
+  });
+}
+
+initBrainGraph();
+
 bootstrap().catch((error) => {
   showLogin();
   $("#login-error").textContent = error.message;
