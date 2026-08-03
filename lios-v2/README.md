@@ -11,7 +11,7 @@ Painel privado e orquestrador próprio da LIOS, sem n8n e sem dependências npm.
 - dashboard com dados reais de disponibilidade, latência e auditoria SEO;
 - fluxos visuais com execução em código e atualização ao vivo por SSE;
 - histórico persistente de até 500 execuções;
-- segundo cérebro local com notas, tags e busca;
+- Cesar · Second Brain, memória local com notas, tags e busca;
 - cadastro visual de agentes, inicialmente inativos e com custo de IA zero.
 
 ## Configuração
