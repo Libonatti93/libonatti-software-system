@@ -194,6 +194,7 @@ button { color: inherit; cursor: pointer; }
 .cesar-map-head { position: absolute; z-index: 2; top: 22px; left: 24px; right: 24px; display: flex; justify-content: space-between; align-items: start; pointer-events: none; }
 .cesar-map-head span { color: var(--lime); font: 700 9px var(--mono); letter-spacing: .15em; }
 .cesar-map-head h3 { margin: 7px 0 0; font-size: 19px; }
+.cesar-map-head p { margin: 7px 0 0; color: #777d6e; font-size: 10px; }
 .cesar-map-head > b { padding: 8px 10px; border: 1px solid #d9ff4355; color: var(--lime); background: #0b0d09cc; font: 700 8px var(--mono); letter-spacing: .1em; }
 .cesar-map-stats { position: absolute; z-index: 2; left: 24px; right: 24px; bottom: 20px; display: flex; gap: 20px; pointer-events: none; color: #777d6e; font: 700 8px var(--mono); letter-spacing: .11em; }
 .cesar-map-stats b { color: var(--paper); font-size: 10px; }
@@ -212,6 +213,8 @@ button { color: inherit; cursor: pointer; }
 .note-tags span { padding: 5px 7px; border: 1px solid #355043; color: #8aa094; font: 8px var(--mono); text-transform: uppercase; }
 .note-meta { margin-top: 15px; display: flex; align-items: center; justify-content: space-between; color: #5f7568; font-size: 9px; }
 .note-meta button { border: 0; background: transparent; color: #8b625f; }
+.note-meta span { display: flex; gap: 8px; }
+.note-meta [data-edit-note] { color: var(--lime); }
 .note-editor { padding-bottom: 22px; align-self: start; }
 .note-editor > label, .note-editor > .primary-action, .note-editor > .form-error { margin-left: 20px; margin-right: 20px; }
 .note-editor textarea { resize: vertical; line-height: 1.5; }

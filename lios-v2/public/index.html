@@ -6,8 +6,8 @@
     <meta name="theme-color" content="#080808" />
     <meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
     <title>ML Central · Matheus Libonatti</title>
-    <link rel="stylesheet" href="/app.css?v=11" />
-    <script src="/app.js?v=11" defer></script>
+    <link rel="stylesheet" href="/app.css?v=12" />
+    <script src="/app.js?v=12" defer></script>
   </head>
   <body>
     <div class="login-shell" id="login-shell">
@@ -144,7 +144,7 @@
           </div>
           <article class="cesar-knowledge-map panel">
             <canvas id="cesar-map-canvas" aria-label="Grafo vivo das memórias conectadas do Cesar"></canvas>
-            <div class="cesar-map-head"><div><span>RAG · BASE VETORIAL LOCAL</span><h3>Mapa vivo do conhecimento</h3></div><b id="cesar-map-status">CARREGANDO</b></div>
+            <div class="cesar-map-head"><div><span>RAG · BASE VETORIAL LOCAL</span><h3>Átomo do conhecimento</h3><p>Clique em um ponto para abrir e editar a memória.</p></div><b id="cesar-map-status">CARREGANDO</b></div>
             <div class="cesar-map-stats"><span><b id="cesar-node-count">0</b> NOTAS</span><span><b id="cesar-link-count">0</b> CONEXÕES</span><span><i></i> AO VIVO</span></div>
             <div class="cesar-map-tooltip" id="cesar-map-tooltip" hidden></div>
           </article>
@@ -155,11 +155,11 @@
           <div class="brain-layout">
             <div class="note-grid" id="note-grid"></div>
             <form class="note-editor panel" id="note-form" hidden>
-              <div class="panel-head"><div><span>NOVA MEMÓRIA · CESAR</span><h3>Registrar nota</h3></div><button type="button" id="close-note">×</button></div>
+              <div class="panel-head"><div><span id="note-form-eyebrow">NOVA MEMÓRIA · CESAR</span><h3 id="note-form-title">Registrar nota</h3></div><button type="button" id="close-note">×</button></div>
               <label>Título<input id="note-title" required maxlength="140" /></label>
               <label>Conteúdo<textarea id="note-body" required maxlength="12000" rows="12"></textarea></label>
               <label>Tags<input id="note-tags" placeholder="estratégia, fonte, decisão" /></label>
-              <button class="primary-action" type="submit">Salvar no Cesar</button>
+              <button class="primary-action" id="note-submit" type="submit">Salvar no Cesar</button>
               <p class="form-error" id="note-error" role="alert"></p>
             </form>
           </div>

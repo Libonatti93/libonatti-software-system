@@ -10,7 +10,8 @@ const state = {
   radarFilter: "todos",
   events: null,
   cesarFrame: 0,
-  cesarMapAbort: null
+  cesarMapAbort: null,
+  editingNoteId: null
 };
 
 const $ = (selector, context = document) => context.querySelector(selector);
@@ -323,9 +324,13 @@ function renderNotes() {
       <h3>${esc(note.title)}</h3>
       <p>${esc(note.body)}</p>
       <div class="note-tags">${note.tags.map((tag) => `<span>${esc(tag)}</span>`).join("")}</div>
-      <div class="note-meta"><time>${esc(formatDate(note.updatedAt))}</time><button data-delete-note="${esc(note.id)}">Excluir</button></div>
+      <div class="note-meta"><time>${esc(formatDate(note.updatedAt))}</time><span><button data-edit-note="${esc(note.id)}">Editar</button><button data-delete-note="${esc(note.id)}">Excluir</button></span></div>
     </article>
   `).join("") : '<div class="empty-state">Nenhuma nota encontrada.</div>';
+  $$('[data-edit-note]').forEach((button) => button.addEventListener("click", () => {
+    const note = state.notes.find((item) => item.id === button.dataset.editNote);
+    if (note) openNoteEditor(note);
+  }));
   $$("[data-delete-note]").forEach((button) => button.addEventListener("click", async () => {
     if (!window.confirm("Excluir esta nota da memória?")) return;
     try {
@@ -336,6 +341,26 @@ function renderNotes() {
       toast(error.message);
     }
   }));
+}
+
+function openNoteEditor(note = null) {
+  state.editingNoteId = note?.id || null;
+  $("#note-form").hidden = false;
+  $("#note-form-eyebrow").textContent = note ? "EDITAR MEMÓRIA · CESAR" : "NOVA MEMÓRIA · CESAR";
+  $("#note-form-title").textContent = note ? note.title : "Registrar nota";
+  $("#note-submit").textContent = note ? "Atualizar memória" : "Salvar no Cesar";
+  $("#note-title").value = note?.title || "";
+  $("#note-body").value = note?.body || "";
+  $("#note-tags").value = (note?.tags || []).join(", ");
+  $("#note-form").scrollIntoView({ behavior: "smooth", block: "center" });
+  $("#note-title").focus({ preventScroll: true });
+}
+
+function closeNoteEditor() {
+  state.editingNoteId = null;
+  $("#note-form").reset();
+  $("#note-form").hidden = true;
+  $("#note-error").textContent = "";
 }
 
 function renderCesarMap() {
@@ -351,16 +376,18 @@ function renderCesarMap() {
   const palette = ["217,255,67", "156,124,255", "242,241,237", "255,77,0", "109,225,232"];
   const notes = state.notes.map((note, index) => {
     const vector = Array.isArray(note.vector) ? note.vector : [];
-    const angle = index * 2.39996 + (vector[0] || 0) * 2;
-    const radius = 80 + Math.sqrt(index + 1) * 30 + Math.abs(vector[1] || 0) * 100;
+    const count = Math.max(1, state.notes.length);
+    const latitude = 1 - 2 * (index + .5) / count;
+    const shellRadius = Math.sqrt(Math.max(0, 1 - latitude * latitude));
+    const longitude = index * Math.PI * (3 - Math.sqrt(5)) + (vector[0] || 0) * .45;
     return {
       ...note,
-      x: Math.cos(angle) * radius,
-      y: Math.sin(angle) * radius * .68,
-      z: (vector[2] || Math.sin(angle * 1.4)) * 240,
-      size: 1.8 + Math.min(5, (note.relatedIds || []).length) * .42,
+      x: Math.cos(longitude) * shellRadius,
+      y: latitude,
+      z: Math.sin(longitude) * shellRadius,
+      size: 2.5 + Math.min(5, (note.relatedIds || []).length) * .5,
       color: Math.abs(Math.round((vector[3] || index) * 1000)) % palette.length,
-      phase: angle
+      phase: longitude
     };
   });
   const byId = new Map(notes.map((note, index) => [note.id, index]));
@@ -383,6 +410,7 @@ function renderCesarMap() {
   let ratio = 1;
   let projected = [];
   let pointer = { x: -1000, y: -1000 };
+  let hoveredNote = null;
 
   function resize() {
     const bounds = canvas.getBoundingClientRect();
@@ -398,12 +426,16 @@ function renderCesarMap() {
     const rotation = reducedMotion ? 0 : time * .000025;
     const cos = Math.cos(rotation);
     const sin = Math.sin(rotation);
-    const px = note.x * cos - note.z * sin;
-    const depth = note.x * sin + note.z * cos;
-    const perspective = 600 / (760 + depth);
+    const sphereRadius = Math.min(width, height) * .37;
+    const rotatedX = (note.x * cos - note.z * sin) * sphereRadius;
+    const rotatedZ = (note.x * sin + note.z * cos) * sphereRadius;
+    const pitch = -.28;
+    const rotatedY = (note.y * Math.cos(pitch) - (rotatedZ / sphereRadius) * Math.sin(pitch)) * sphereRadius;
+    const depth = note.y * Math.sin(pitch) * sphereRadius + rotatedZ * Math.cos(pitch);
+    const perspective = 650 / (760 + depth);
     return {
-      x: width * .5 + px * perspective,
-      y: height * .52 + note.y * perspective + Math.sin(time * .00025 + note.phase) * 4,
+      x: width * .5 + rotatedX * perspective,
+      y: height * .53 + rotatedY * perspective + Math.sin(time * .00022 + note.phase) * 2.5,
       depth,
       scale: Math.max(.38, perspective)
     };
@@ -412,6 +444,27 @@ function renderCesarMap() {
   function draw(time) {
     context.clearRect(0, 0, width, height);
     projected = notes.map((note) => project(note, time));
+    const orbitRadius = Math.min(width, height) * .31;
+    context.save();
+    context.translate(width * .5, height * .53);
+    for (const [rotation, squash, color] of [[-.5, .3, "217,255,67"], [.55, .26, "156,124,255"], [0, .18, "242,241,237"]]) {
+      context.beginPath();
+      context.ellipse(0, 0, orbitRadius, orbitRadius * squash, rotation, 0, Math.PI * 2);
+      context.strokeStyle = `rgba(${color},.18)`;
+      context.lineWidth = .7;
+      context.stroke();
+    }
+    const nucleusPulse = 1 + Math.sin(time * .0012) * .12;
+    const nucleus = context.createRadialGradient(0, 0, 0, 0, 0, 34 * nucleusPulse);
+    nucleus.addColorStop(0, "rgba(255,255,255,1)");
+    nucleus.addColorStop(.12, "rgba(217,255,67,.95)");
+    nucleus.addColorStop(.42, "rgba(217,255,67,.28)");
+    nucleus.addColorStop(1, "rgba(217,255,67,0)");
+    context.fillStyle = nucleus;
+    context.beginPath();
+    context.arc(0, 0, 34 * nucleusPulse, 0, Math.PI * 2);
+    context.fill();
+    context.restore();
     links.forEach(([from, to], index) => {
       const a = projected[from];
       const b = projected[to];
@@ -434,7 +487,7 @@ function renderCesarMap() {
     notes.map((note, index) => ({ note, point: projected[index], index }))
       .sort((a, b) => b.point.depth - a.point.depth)
       .forEach(({ note, point }) => {
-        const hovered = Math.hypot(pointer.x - point.x, pointer.y - point.y) < note.size * point.scale + 7;
+        const hovered = hoveredNote?.id === note.id;
         const radius = note.size * point.scale * (hovered ? 1.8 : 1);
         context.beginPath();
         context.arc(point.x, point.y, radius + (hovered ? 8 : 3), 0, Math.PI * 2);
@@ -461,6 +514,8 @@ function renderCesarMap() {
       const distance = Math.hypot(pointer.x - point.x, pointer.y - point.y);
       if (distance < 14 && (!closest || distance < closest.distance)) closest = { note, distance };
     });
+    hoveredNote = closest?.note || null;
+    canvas.style.cursor = hoveredNote ? "pointer" : "default";
     if (!closest) {
       tooltip.hidden = true;
       return;
@@ -474,7 +529,8 @@ function renderCesarMap() {
   resize();
   window.addEventListener("resize", resize, { passive: true, signal });
   canvas.addEventListener("mousemove", updateTooltip, { passive: true, signal });
-  canvas.addEventListener("mouseleave", () => { pointer = { x: -1000, y: -1000 }; tooltip.hidden = true; }, { signal });
+  canvas.addEventListener("click", () => { if (hoveredNote) openNoteEditor(hoveredNote); }, { signal });
+  canvas.addEventListener("mouseleave", () => { pointer = { x: -1000, y: -1000 }; hoveredNote = null; tooltip.hidden = true; canvas.style.cursor = "default"; }, { signal });
   state.cesarFrame = window.requestAnimationFrame(draw);
 }
 
@@ -488,29 +544,26 @@ $("#note-search").addEventListener("input", (event) => {
   window.clearTimeout(event.currentTarget.searchTimer);
   event.currentTarget.searchTimer = window.setTimeout(() => searchNotes(event.currentTarget.value).catch((error) => toast(error.message)), 220);
 });
-$("#new-note").addEventListener("click", () => {
-  $("#note-form").hidden = false;
-  $("#note-title").focus();
-});
-$("#close-note").addEventListener("click", () => { $("#note-form").hidden = true; });
+$("#new-note").addEventListener("click", () => openNoteEditor());
+$("#close-note").addEventListener("click", closeNoteEditor);
 $("#note-form").addEventListener("submit", async (event) => {
   event.preventDefault();
   const form = event.currentTarget;
   $("#note-error").textContent = "";
   try {
-    await api("/api/notes", {
-      method: "POST",
+    const editing = state.editingNoteId;
+    await api(editing ? `/api/notes/${editing}` : "/api/notes", {
+      method: editing ? "PUT" : "POST",
       body: JSON.stringify({
         title: $("#note-title").value,
         body: $("#note-body").value,
         tags: $("#note-tags").value
       })
     });
-    form.reset();
-    form.hidden = true;
+    closeNoteEditor();
     $("#note-search").value = "";
     await searchNotes("");
-    toast("Nota salva no Cesar.");
+    toast(editing ? "Memória atualizada e reconectada." : "Nota salva no Cesar. Um novo ponto foi conectado.");
   } catch (error) {
     $("#note-error").textContent = error.message;
   }

@@ -1103,6 +1103,33 @@ const server = http.createServer(async (req, res) => {
         return;
       }
       const noteMatch = pathname.match(/^\/api\/notes\/([a-z0-9-]+)$/);
+      if (noteMatch && req.method === "PUT") {
+        const noteIndex = state.notes.findIndex((note) => note.id === noteMatch[1]);
+        if (noteIndex === -1) {
+          sendJson(res, 404, { error: "Nota não encontrada." });
+          return;
+        }
+        const body = await readJson(req);
+        const title = safeText(body.title, 140);
+        const noteBody = safeText(body.body, 12000);
+        if (!title || !noteBody) {
+          sendJson(res, 400, { error: "Título e conteúdo são obrigatórios." });
+          return;
+        }
+        state.notes[noteIndex] = {
+          ...state.notes[noteIndex],
+          title,
+          body: noteBody,
+          tags: Array.isArray(body.tags)
+            ? body.tags.map((tag) => safeText(tag, 32)).filter(Boolean).slice(0, 12)
+            : safeText(body.tags, 300).split(",").map((tag) => tag.trim()).filter(Boolean).slice(0, 12),
+          updatedAt: new Date().toISOString()
+        };
+        state.notes = connectCesarNotes(state.notes);
+        await persist();
+        sendJson(res, 200, { note: state.notes.find((note) => note.id === noteMatch[1]) });
+        return;
+      }
       if (noteMatch && req.method === "DELETE") {
         const before = state.notes.length;
         state.notes = state.notes.filter((note) => note.id !== noteMatch[1]);
