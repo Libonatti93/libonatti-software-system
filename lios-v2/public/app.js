@@ -214,7 +214,7 @@ function renderDashboard() {
     ["DISPONIBILIDADE AGORA", summary.uptimePercent == null ? "—" : `${summary.uptimePercent}%`, "Última leitura das páginas públicas", true],
     ["LATÊNCIA MÉDIA", summary.averageLatencyMs == null ? "—" : `${summary.averageLatencyMs} ms`, "PT-BR + ES", summary.averageLatencyMs != null && summary.averageLatencyMs < 1000],
     ["SAÚDE TÉCNICA SEO", summary.seoScore == null ? "—" : `${summary.seoScore}%`, summary.auditedPages == null ? "Auditoria ainda não executada" : `${summary.auditedPages} páginas auditadas`, summary.seoScore >= 90],
-    ["CUSTO DE IA", "R$ 0,00", `${summary.activeAgents} agentes ativos`, true]
+    ["MEMÓRIAS CESAR", state.notes.length, "Base vetorial local conectada", state.notes.length > 0]
   ];
   $("#metric-grid").innerHTML = metrics.map(([label, value, detail, ok]) => `
     <article class="metric-card">
@@ -570,62 +570,48 @@ $("#note-form").addEventListener("submit", async (event) => {
 });
 
 function renderAgents() {
-  $("#agent-grid").innerHTML = state.agents.map((agent, index) => `
+  const signals = state.radar?.signals?.length || 0;
+  const memories = state.notes.length;
+  const relationships = state.notes.reduce((total, note) => total + (note.relatedIds?.length || 0), 0);
+  const runs = state.dashboard?.summary?.totalRuns || 0;
+  const successRate = state.dashboard?.summary?.successRate;
+  $("#agent-command").innerHTML = `
+    <div class="agent-command-copy">
+      <span>CENTRO DE COMANDO</span>
+      <h3>Quatro inteligências.<br />Uma operação contínua.</h3>
+      <p>O radar encontra sinais. Cesar recupera contexto. O editor transforma evidência em entrega. O auditor protege qualidade e reputação.</p>
+    </div>
+    <div class="agent-live-metrics">
+      <div><span>SINAIS NO RADAR</span><strong>${esc(signals)}</strong><small>fontes públicas priorizadas</small></div>
+      <div><span>MEMÓRIAS CESAR</span><strong>${esc(memories)}</strong><small>documentos vetorizados</small></div>
+      <div><span>CONEXÕES</span><strong>${esc(relationships)}</strong><small>relações semânticas</small></div>
+      <div><span>EXECUÇÕES</span><strong>${esc(runs)}</strong><small>${successRate == null ? "histórico rastreável" : `${successRate}% concluídas com sucesso`}</small></div>
+    </div>
+  `;
+  const presentationAgents = [
+    { name: "Radar", code: "DISCOVER", status: signals ? "OPERANDO" : "OBSERVANDO", role: "Monitora fontes públicas, detecta movimentos relevantes e organiza o que merece atenção.", input: "Internet aberta", output: `${signals} sinais priorizados` },
+    { name: "Cesar", code: "REMEMBER", status: "CONECTADO", role: "Recupera memórias, aproxima conceitos e entrega contexto antes de qualquer decisão ou criação.", input: `${memories} memórias`, output: `${relationships} conexões` },
+    { name: "Editor", code: "CREATE", status: "ORQUESTRADO", role: "Converte sinais e contexto em hipóteses, análises e entregas estruturadas para revisão.", input: "Evidência + contexto", output: "Entrega revisável" },
+    { name: "Auditor", code: "PROTECT", status: "GATE HUMANO", role: "Verifica fonte, coerência, SEO e risco antes que qualquer material avance para o mundo externo.", input: "Rascunho rastreável", output: "Decisão segura" }
+  ];
+  $("#agent-grid").innerHTML = presentationAgents.map((agent, index) => `
     <article class="agent-card">
-      <header><span>AGENTE / 0${index + 1}</span><b>${agent.enabled ? "ATIVO" : "EM ESPERA"}</b></header>
+      <header><span>0${index + 1} · ${esc(agent.code)}</span><b>${esc(agent.status)}</b></header>
       <h3>${esc(agent.name)}</h3>
       <p>${esc(agent.role)}</p>
-      <footer><span>${esc(agent.provider)}</span><span>${esc(agent.budget)}</span></footer>
+      <footer><span>${esc(agent.input)}</span><span>→ ${esc(agent.output)}</span></footer>
     </article>
   `).join("");
-  const collector = state.agentInfo?.relevanceAgent;
-  if (collector) {
-    const { configuration, stats } = collector;
-    $("#relevance-agent-panel").innerHTML = `
-      <div class="panel-head">
-        <div><span>COLETOR EDITORIAL</span><h3>Memória vetorial Matheus Libonatti</h3></div>
-        <b>${state.agentInfo.providerConfigured ? "CONFIGURADO" : "AGUARDANDO CHAVE"}</b>
-      </div>
-      <div class="agent-metrics">
-        <div><span>JANELA</span><strong>${esc(configuration.windowStart)}–${esc(configuration.windowEnd)}</strong><small>Horário de Brasília</small></div>
-        <div><span>ANALISADAS</span><strong>${esc(stats.analyzed)}</strong><small>histórico total</small></div>
-        <div><span>NO RAG</span><strong>${esc(stats.stored)}</strong><small>nota ≥ 6/10</small></div>
-        <div><span>DESCARTADAS</span><strong>${esc(stats.discarded)}</strong><small>nota abaixo de 6</small></div>
-      </div>
-      <p class="agent-config-message">${esc(state.agentInfo.message)} Status atual: ${esc(configuration.status)}.</p>
-    `;
-  }
-  const editor = state.agentInfo?.editorAgent;
-  if (editor) {
-    const { configuration, stats, drafts = [] } = editor;
-    $("#editor-agent-panel").innerHTML = `
-      <div class="panel-head">
-        <div><span>EDITOR DE INTELIGÊNCIA</span><h3>Rascunhos autorais Matheus Libonatti</h3></div>
-        <b>${state.agentInfo.providerConfigured ? "CONFIGURADO" : "AGUARDANDO CHAVE"}</b>
-      </div>
-      <div class="agent-metrics">
-        <div><span>EXECUÇÃO</span><strong>${esc(configuration.scheduledAt)}</strong><small>Todos os dias · Brasília</small></div>
-        <div><span>RASCUNHOS</span><strong>${esc(stats.drafts)}</strong><small>histórico total</small></div>
-        <div><span>EM REVISÃO</span><strong>${esc(stats.awaiting_review)}</strong><small>nada publicado sozinho</small></div>
-        <div><span>CORTE</span><strong>8/10</strong><small>2+ fontes · máximo 6/semana</small></div>
-      </div>
-      <div class="editor-draft-list">
-        ${drafts.length ? drafts.map((draft) => `
-          <details>
-            <summary><span>RASCUNHO #${esc(draft.id)}</span><strong>${esc(draft.title)}</strong></summary>
-            <p>${esc(draft.dek)}</p>
-            <p><b>Linha editorial:</b> ${esc(draft.editorial_angle)}</p>
-            <p><b>Busca:</b> ${esc(draft.primary_keyword)} · ${esc(draft.search_intent)}</p>
-            <div class="draft-source-links">${draft.sources.map((source) => `
-              <a href="${esc(source.url)}" target="_blank" rel="noopener noreferrer">${esc(source.source)} · ${esc(source.relevance)}/10 ↗</a>
-            `).join("")}</div>
-            <pre>${esc(draft.body_markdown)}</pre>
-          </details>
-        `).join("") : '<div class="empty-state">Os rascunhos aparecerão após o RAG possuir pelo menos duas notícias compatíveis.</div>'}
-      </div>
-      <p class="agent-config-message">Status atual: ${esc(configuration.status)}. Os textos ficam em revisão humana e preservam as fontes utilizadas.</p>
-    `;
-  }
+  const stages = [
+    ["01", "Descobrir", "Fontes e sinais entram com origem identificada."],
+    ["02", "Priorizar", "Relevância e impacto definem o que avança."],
+    ["03", "Contextualizar", "Cesar recupera relações e memórias úteis."],
+    ["04", "Construir", "O editor estrutura uma entrega fundamentada."],
+    ["05", "Validar", "Auditoria e decisão humana fecham o ciclo."]
+  ];
+  $("#agent-operation-flow").innerHTML = stages.map(([number, title, description]) => `
+    <li><span>${number}</span><div><b>${title}</b><p>${description}</p></div></li>
+  `).join("");
 }
 
 function renderAudit() {
