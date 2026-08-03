@@ -263,12 +263,12 @@ const cesarDomains = [
   ["agentes", "Agentes de IA", "papéis, ferramentas, memória, limites e colaboração entre agentes", ["agentes", "ia"]],
   ["automacao", "Automação inteligente", "gatilhos, filas, idempotência, observabilidade e execução confiável", ["automacao", "workflows"]],
   ["engenharia", "Engenharia de software", "código sustentável, contratos, testes, versionamento e evolução", ["engenharia", "software"]],
-  ["dados", "Dados e conhecimento", "qualidade, proveniência, modelos, metadados e governança", ["dados", "conhecimento"]],
-  ["seguranca", "Segurança e privacidade", "autenticação, autorização, segredos, auditoria e proteção de dados", ["seguranca", "privacidade"]],
-  ["produto", "Produto e experiência", "problemas reais, jornadas, feedback, métricas e decisões de produto", ["produto", "ux"]],
-  ["conteudo", "Conteúdo e descoberta", "pesquisa, autoridade, SEO, distribuição e utilidade editorial", ["conteudo", "seo"]],
-  ["infraestrutura", "Infraestrutura e operação", "Docker, redes, proxy, disponibilidade, logs e recuperação", ["infraestrutura", "devops"]],
-  ["estrategia", "Estratégia tecnológica", "priorização, custos, riscos, diferenciação e construção de ativos", ["estrategia", "tecnologia"]]
+  ["google-search", "Google Search", "indexação, intenção de busca, cobertura, descoberta orgânica e avaliação de resultados", ["google", "search", "seo"]],
+  ["openai", "OpenAI", "modelos, Responses API, embeddings, ferramentas, segurança e aplicações com contexto", ["openai", "ia", "api"]],
+  ["gemini", "Google Gemini", "modelos multimodais, grounding, contexto, integração e comparação responsável", ["gemini", "google", "ia"]],
+  ["web-scraping", "Web scraping e crawlers", "coleta ética, robots, parsing, filas, deduplicação e rastreabilidade de fontes", ["web-scraping", "crawler", "coleta"]],
+  ["ranking-dados", "Ranking de dados", "relevância, qualidade, recência, autoridade, sinais e ordenação explicável", ["ranking", "dados", "relevancia"]],
+  ["sites-google", "Sites no Google", "SEO técnico, Search Console, sitemaps, canonical, dados estruturados e desempenho", ["google", "sites", "search-console"]]
 ];
 
 const cesarAspects = [
@@ -307,7 +307,7 @@ function cesarSeedNotes() {
       const tags = ["cesar", "lios", domainId, aspectId, ...domainTags, cesarDomains[(domainIndex + aspectIndex + 1) % cesarDomains.length][0]];
       return {
         id: `cesar-${domainId}-${aspectId}`,
-        seedVersion: 1,
+        seedVersion: 2,
         title,
         body,
         tags: [...new Set(tags)],
@@ -447,11 +447,20 @@ if (avatarNoteIndex === -1) {
   await persist();
 }
 
-const existingNoteIds = new Set(state.notes.map((note) => note.id));
-const missingCesarNotes = cesarSeedNotes().filter((note) => !existingNoteIds.has(note.id));
-if (missingCesarNotes.length) state.notes.push(...missingCesarNotes);
+const desiredCesarNotes = cesarSeedNotes();
+const desiredCesarIds = new Set(desiredCesarNotes.map((note) => note.id));
+const existingSeedNotes = new Map(state.notes.filter((note) => note.seedVersion).map((note) => [note.id, note]));
+state.notes = state.notes.filter((note) => !note.seedVersion || desiredCesarIds.has(note.id));
+state.notes = state.notes.filter((note) => !note.seedVersion);
+state.notes.push(...desiredCesarNotes.map((note) => {
+  const existing = existingSeedNotes.get(note.id);
+  return existing?.seedVersion === 2 ? existing : {
+    ...note,
+    createdAt: existing?.createdAt || note.createdAt
+  };
+}));
 state.notes = connectCesarNotes(state.notes);
-if (missingCesarNotes.length || state.notes.some((note) => !note.vector || !note.relatedIds)) await persist();
+await persist();
 
 function persist() {
   persistQueue = persistQueue.then(async () => {

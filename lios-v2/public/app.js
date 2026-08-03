@@ -423,7 +423,7 @@ function renderCesarMap() {
   }
 
   function project(note, time) {
-    const rotation = reducedMotion ? 0 : time * .000025;
+    const rotation = reducedMotion ? 0 : time * .00003;
     const cos = Math.cos(rotation);
     const sin = Math.sin(rotation);
     const sphereRadius = Math.min(width, height) * .37;
@@ -435,7 +435,7 @@ function renderCesarMap() {
     const perspective = 650 / (760 + depth);
     return {
       x: width * .5 + rotatedX * perspective,
-      y: height * .53 + rotatedY * perspective + Math.sin(time * .00022 + note.phase) * 2.5,
+      y: height * .53 + rotatedY * perspective + Math.sin(time * .000264 + note.phase) * 2.5,
       depth,
       scale: Math.max(.38, perspective)
     };
@@ -454,7 +454,7 @@ function renderCesarMap() {
       context.lineWidth = .7;
       context.stroke();
     }
-    const nucleusPulse = 1 + Math.sin(time * .0012) * .12;
+    const nucleusPulse = 1 + Math.sin(time * .00144) * .12;
     const nucleus = context.createRadialGradient(0, 0, 0, 0, 0, 34 * nucleusPulse);
     nucleus.addColorStop(0, "rgba(255,255,255,1)");
     nucleus.addColorStop(.12, "rgba(217,255,67,.95)");
@@ -475,7 +475,7 @@ function renderCesarMap() {
       context.lineWidth = .55;
       context.stroke();
       if (!reducedMotion && index % 5 === 0) {
-        const progress = (time * .000025 + index * .091) % 1;
+        const progress = (time * .00003 + index * .091) % 1;
         const x = a.x + (b.x - a.x) * progress;
         const y = a.y + (b.y - a.y) * progress;
         context.beginPath();
@@ -736,7 +736,7 @@ function initBrainGraph() {
       size: index < 9 ? 2.7 + (index % 3) : .8 + (index % 5) * .38,
       cluster,
       phase: Math.random() * Math.PI * 2,
-      speed: .00015 + Math.random() * .00022
+      speed: .00018 + Math.random() * .000264
     };
   });
   const links = [];
@@ -772,7 +772,7 @@ function initBrainGraph() {
     const perspective = 520 / (620 + depth);
     return {
       x: width * .52 + px * perspective,
-      y: height * .48 + node.y * perspective + Math.sin(time * .0002 + node.phase) * 7,
+      y: height * .48 + node.y * perspective + Math.sin(time * .00024 + node.phase) * 7,
       depth,
       scale: Math.max(.35, perspective)
     };
@@ -799,7 +799,7 @@ function initBrainGraph() {
       context.lineWidth = linkIndex % 7 === 0 ? .85 : .45;
       context.stroke();
       if (!reducedMotion && linkIndex % 4 === 0) {
-        const travel = (time * .00004 + linkIndex * .137) % 1;
+        const travel = (time * .000048 + linkIndex * .137) % 1;
         const x = a.x + (b.x - a.x) * travel;
         const y = a.y + (b.y - a.y) * travel;
         context.beginPath();
@@ -815,7 +815,7 @@ function initBrainGraph() {
     nodes.map((node, index) => ({ node, point: projected[index] }))
       .sort((a, b) => b.point.depth - a.point.depth)
       .forEach(({ node, point }) => {
-        const pulse = 1 + Math.sin(time * .0008 + node.phase) * .22;
+        const pulse = 1 + Math.sin(time * .00096 + node.phase) * .22;
         const radius = node.size * point.scale * pulse;
         const alpha = Math.max(.28, Math.min(.95, .72 - point.depth / 900));
         context.beginPath();
