@@ -52,15 +52,15 @@ button { color: inherit; cursor: pointer; }
 .login-visual::before { content: ""; position: absolute; inset: 0; z-index: -1; opacity: .13; background-image: linear-gradient(#7f875b 1px, transparent 1px), linear-gradient(90deg, #7f875b 1px, transparent 1px); background-size: 52px 52px; mask-image: radial-gradient(circle, black, transparent 78%); }
 #brain-canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
 .brain-nucleus { position: absolute; left: 52%; top: 48%; width: 116px; aspect-ratio: 1; transform: translate(-50%, -50%); pointer-events: none; filter: drop-shadow(0 0 24px #d9ff4366); }
-.brain-nucleus::before, .brain-nucleus::after, .brain-nucleus i { content: ""; position: absolute; inset: 16px -16px; border: 1px solid #d9ff4380; border-radius: 50%; animation: nucleus-orbit 7s linear infinite; }
-.brain-nucleus::after { transform: rotate(60deg); animation-duration: 9s; animation-direction: reverse; }
-.brain-nucleus i:nth-child(1) { transform: rotate(-60deg); animation-duration: 11s; }
-.brain-nucleus i:nth-child(2) { inset: 26px -6px; border-style: dashed; opacity: .65; animation-duration: 5s; animation-direction: reverse; }
-.brain-nucleus i:nth-child(3) { inset: 38px 8px; border-color: #9c7cff88; animation-duration: 4s; }
+.brain-nucleus::before, .brain-nucleus::after, .brain-nucleus i { content: ""; position: absolute; inset: 16px -16px; border: 1px solid #d9ff4380; border-radius: 50%; animation: nucleus-orbit 12s linear infinite; }
+.brain-nucleus::after { transform: rotate(60deg); animation-duration: 15s; animation-direction: reverse; }
+.brain-nucleus i:nth-child(1) { transform: rotate(-60deg); animation-duration: 18s; }
+.brain-nucleus i:nth-child(2) { inset: 26px -6px; border-style: dashed; opacity: .65; animation-duration: 9s; animation-direction: reverse; }
+.brain-nucleus i:nth-child(3) { inset: 38px 8px; border-color: #9c7cff88; animation-duration: 7s; }
 .brain-nucleus b { position: absolute; inset: 35px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #fff, #d9ff43 18%, #88a71e 45%, #202608 72%); box-shadow: 0 0 12px #fff, 0 0 38px #d9ff43, 0 0 85px #d9ff4355; animation: nucleus-pulse 2.2s ease-in-out infinite; }
 .brain-nucleus b::before, .brain-nucleus b::after { content: ""; position: absolute; width: 7px; aspect-ratio: 1; border-radius: 50%; background: #f2f1ed; box-shadow: 0 0 10px #fff; }
-.brain-nucleus b::before { left: -31px; top: 12px; animation: electron-a 3.2s linear infinite; }
-.brain-nucleus b::after { right: -29px; bottom: 10px; animation: electron-b 4.1s linear infinite; }
+.brain-nucleus b::before { left: -31px; top: 12px; animation: electron-a 5.8s linear infinite; }
+.brain-nucleus b::after { right: -29px; bottom: 10px; animation: electron-b 7.2s linear infinite; }
 .brain-readout { position: absolute; min-width: 132px; padding: 10px 12px; border-left: 1px solid #d9ff43; background: linear-gradient(90deg, #11140de8, transparent); font-family: var(--mono); backdrop-filter: blur(6px); }
 .brain-readout span { display: block; margin-bottom: 5px; color: #777d68; font-size: 8px; letter-spacing: .13em; }
 .brain-readout b { color: #d9ff43; font-size: 9px; letter-spacing: .09em; }

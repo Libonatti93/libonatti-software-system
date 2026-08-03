@@ -539,7 +539,7 @@ function initBrainGraph() {
       size: index < 9 ? 2.7 + (index % 3) : .8 + (index % 5) * .38,
       cluster,
       phase: Math.random() * Math.PI * 2,
-      speed: .0007 + Math.random() * .0011
+      speed: .00028 + Math.random() * .00042
     };
   });
   const links = [];
@@ -575,7 +575,7 @@ function initBrainGraph() {
     const perspective = 520 / (620 + depth);
     return {
       x: width * .52 + px * perspective,
-      y: height * .48 + node.y * perspective + Math.sin(time * .0007 + node.phase) * 7,
+      y: height * .48 + node.y * perspective + Math.sin(time * .00032 + node.phase) * 7,
       depth,
       scale: Math.max(.35, perspective)
     };
@@ -602,7 +602,7 @@ function initBrainGraph() {
       context.lineWidth = linkIndex % 7 === 0 ? .85 : .45;
       context.stroke();
       if (!reducedMotion && linkIndex % 4 === 0) {
-        const travel = (time * .00016 + linkIndex * .137) % 1;
+        const travel = (time * .00007 + linkIndex * .137) % 1;
         const x = a.x + (b.x - a.x) * travel;
         const y = a.y + (b.y - a.y) * travel;
         context.beginPath();
@@ -618,7 +618,7 @@ function initBrainGraph() {
     nodes.map((node, index) => ({ node, point: projected[index] }))
       .sort((a, b) => b.point.depth - a.point.depth)
       .forEach(({ node, point }) => {
-        const pulse = 1 + Math.sin(time * .002 + node.phase) * .22;
+        const pulse = 1 + Math.sin(time * .0012 + node.phase) * .22;
         const radius = node.size * point.scale * pulse;
         const alpha = Math.max(.28, Math.min(.95, .72 - point.depth / 900));
         context.beginPath();
