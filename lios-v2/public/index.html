@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#080808" />
+    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
+    <title>ML Central · Matheus Libonatti</title>
+    <link rel="stylesheet" href="/app.css?v=7" />
+    <script src="/app.js?v=7" defer></script>
+  </head>
+  <body>
+    <div class="login-shell" id="login-shell">
+      <section class="login-card" aria-labelledby="login-title">
+        <div class="login-brand"><span class="ml-monogram">ML</span><strong>ML CENTRAL<sup>PRIVATE</sup></strong></div>
+        <p class="eyebrow">MATHEUS LIBONATTI · ÁREA PRIVADA</p>
+        <h1 id="login-title">Tudo que importa.<br /><em>Num só lugar.</em></h1>
+        <p class="login-lead">Central privada para projetos, conteúdo, sistemas, inteligência e operação. Uso exclusivo de Matheus Libonatti.</p>
+        <form id="login-form">
+          <label for="username">Usuário</label>
+          <input id="username" name="username" autocomplete="username" required />
+          <label for="password">Senha</label>
+          <input id="password" name="password" type="password" autocomplete="current-password" required />
+          <button type="submit">Acessar painel <span>↗</span></button>
+          <p class="form-error" id="login-error" role="alert"></p>
+        </form>
+        <small>Conexão protegida · sessão privada · sem indexação</small>
+      </section>
+      <div class="login-visual" aria-hidden="true">
+        <div class="visual-orbit orbit-one"></div>
+        <div class="visual-orbit orbit-two"></div>
+        <div class="visual-core"><b>ML</b><span>PRIVATE COMMAND CENTER</span></div>
+        <div class="visual-label label-one">PROJETOS · 01</div>
+        <div class="visual-label label-two">INTELIGÊNCIA · 02</div>
+        <div class="visual-label label-three">OPERAÇÃO · 03</div>
+      </div>
+    </div>
+
+    <div class="app-shell" id="app-shell" hidden>
+      <aside class="sidebar">
+        <a class="side-brand" href="#overview" data-route="overview" aria-label="ML Central — início">
+          <span class="ml-monogram">ML</span>
+          <strong>CENTRAL<sup>PRIVATE</sup></strong>
+        </a>
+        <nav aria-label="Seções do painel">
+          <button class="active" data-route="overview"><span>01</span>Minha central</button>
+          <button data-route="radar"><span>02</span>Radar LIOS</button>
+          <button data-route="workflows"><span>03</span>Automações</button>
+          <button data-route="brain"><span>04</span>Minha memória</button>
+          <button data-route="agents"><span>05</span>Agentes IA</button>
+          <button data-route="audit"><span>06</span>Operação</button>
+        </nav>
+        <div class="side-status">
+          <span class="status-dot"></span>
+          <div><b>SISTEMA ATIVO</b><small id="sidebar-freshness">Atualizando…</small></div>
+        </div>
+        <button class="logout" id="logout">Sair da sessão</button>
+      </aside>
+
+      <main class="workspace">
+        <header class="topbar">
+          <div><p class="eyebrow">MATHEUS LIBONATTI · PRIVATE OS</p><h1 id="page-title">Minha central</h1></div>
+          <div class="topbar-actions">
+            <span class="live-pill"><i></i> AO VIVO</span>
+            <button id="refresh">Atualizar</button>
+          </div>
+        </header>
+
+        <section class="view active" id="view-overview" aria-labelledby="page-title">
+          <div class="hero-panel">
+            <div>
+              <span>ML CENTRAL / ACESSO PRIVADO</span>
+              <h2>Boa noite, Matheus.<br /><em>Vamos construir.</em></h2>
+              <p>Projetos, presença digital e inteligência reunidos na sua central de comando.</p>
+            </div>
+            <div class="hero-clock"><strong id="live-time">--:--</strong><span>BRASÍLIA · SUA CENTRAL</span></div>
+          </div>
+          <div class="central-heading"><div><span>ACESSOS RÁPIDOS</span><h3>Seu ecossistema</h3></div><p>Abra suas ferramentas e projetos sem perder tempo procurando links.</p></div>
+          <div class="access-grid">
+            <a class="access-card featured" href="https://matheuslibonatti.tech/pt-br/" target="_blank" rel="noopener noreferrer"><span>01 · PRESENÇA DIGITAL</span><strong>Meu site</strong><p>Portfólio, serviços, perfil e contato.</p><b>Abrir ↗</b></a>
+            <a class="access-card" href="https://matheuslibonatti.tech/pt-br/blog/" target="_blank" rel="noopener noreferrer"><span>02 · CONTEÚDO</span><strong>Blog</strong><p>Artigos, ideias e publicação técnica.</p><b>Abrir ↗</b></a>
+            <a class="access-card violet" href="https://github.com/Libonatti93" target="_blank" rel="noopener noreferrer"><span>03 · CÓDIGO</span><strong>GitHub</strong><p>Repositórios e atividade de engenharia.</p><b>Abrir ↗</b></a>
+            <a class="access-card" href="https://etranslink.digital/pt-br/" target="_blank" rel="noopener noreferrer"><span>04 · PRODUTO</span><strong>Etranslink</strong><p>Portal público de logística e transporte.</p><b>Abrir ↗</b></a>
+            <a class="access-card" href="https://painel.etranslink.digital/" target="_blank" rel="noopener noreferrer"><span>05 · INTELIGÊNCIA</span><strong>LIOS Etranslink</strong><p>Operação editorial e automações do portal.</p><b>Abrir ↗</b></a>
+            <a class="access-card orange" href="https://www.linkedin.com/in/matheus-libonatti-365492121/" target="_blank" rel="noopener noreferrer"><span>06 · REDE</span><strong>LinkedIn</strong><p>Perfil profissional e conexões.</p><b>Abrir ↗</b></a>
+          </div>
+          <div class="project-strip">
+            <span>MEUS CASES</span>
+            <a href="https://matheuslibonatti.tech/pt-br/projetos/lios/" target="_blank" rel="noopener noreferrer">LIOS ↗</a>
+            <a href="https://matheuslibonatti.tech/pt-br/projetos/etranslink/" target="_blank" rel="noopener noreferrer">Etranslink ↗</a>
+            <a href="https://matheuslibonatti.tech/pt-br/projetos/tripoli/" target="_blank" rel="noopener noreferrer">Tripoli ↗</a>
+            <a href="https://matheuslibonatti.tech/pt-br/projetos/nogueira-cardiologia/" target="_blank" rel="noopener noreferrer">Nogueira ↗</a>
+          </div>
+          <div class="central-heading operation-heading"><div><span>STATUS DO ECOSSISTEMA</span><h3>Operação agora</h3></div><p>Saúde do site pessoal e atividade da LIOS.</p></div>
+          <div class="metric-grid" id="metric-grid"></div>
+          <div class="overview-grid">
+            <article class="panel activity-panel">
+              <div class="panel-head"><div><span>ÚLTIMAS 24 HORAS</span><h3>Execuções dos fluxos</h3></div><b id="run-count">0 RUNS</b></div>
+              <div class="activity-chart" id="activity-chart"></div>
+              <div class="chart-legend"><span><i class="success"></i>Sucesso</span><span><i class="warning"></i>Atenção</span><span><i class="error"></i>Erro</span></div>
+            </article>
+            <article class="panel feed-panel">
+              <div class="panel-head"><div><span>RASTREABILIDADE</span><h3>Atividade recente</h3></div><button data-route="audit">Ver tudo ↗</button></div>
+              <div class="run-feed" id="run-feed"></div>
+            </article>
+          </div>
+        </section>
+
+        <section class="view" id="view-radar">
+          <div class="section-intro">
+            <div><span>INTELIGÊNCIA EDITORIAL</span><h2>Oportunidades reais.<br /><em>Decisão com evidência.</em></h2></div>
+            <p>Busca, imprensa e atenção pública cruzadas a cada 12 minutos para orientar novas pautas e atualizações do portal.</p>
+          </div>
+          <div class="radar-status-grid" id="radar-status-grid"></div>
+          <div class="radar-toolbar panel">
+            <div>
+              <span id="radar-freshness">Aguardando primeira coleta</span>
+              <strong id="radar-total">0 sinais</strong>
+            </div>
+            <div class="radar-filters" id="radar-filters"></div>
+            <button id="refresh-radar">Atualizar radar ↗</button>
+          </div>
+          <div class="radar-grid" id="radar-grid"></div>
+          <article class="panel radar-method">
+            <div><span>COMO LER</span><h3>Prioridade editorial</h3></div>
+            <p><b>PUBLICAR</b> indica oportunidade forte; <b>ATUALIZAR</b> sugere revisar conteúdo existente; <b>MONITORAR</b> pede acompanhamento; <b>OBSERVAR</b> ainda não justifica ação.</p>
+          </article>
+        </section>
+
+        <section class="view" id="view-workflows">
+          <div class="section-intro">
+            <div><span>ORQUESTRAÇÃO PRÓPRIA</span><h2>Fluxos visuais.<br /><em>Código por baixo.</em></h2></div>
+            <p>Cada nó representa uma função versionável e rastreável. O desenho serve para observar; a execução acontece no servidor.</p>
+          </div>
+          <div class="workflow-tabs" id="workflow-tabs"></div>
+          <article class="workflow-canvas panel" id="workflow-canvas"></article>
+          <div class="workflow-detail" id="workflow-detail"></div>
+        </section>
+
+        <section class="view" id="view-brain">
+          <div class="section-intro">
+            <div><span>MEMÓRIA LOCAL</span><h2>Segundo cérebro.<br /><em>Contexto que fica.</em></h2></div>
+            <p>Notas e decisões armazenadas na própria VPS. Busca simples, tags e base pronta para recuperação contextual futura.</p>
+          </div>
+          <div class="brain-toolbar">
+            <label><span>BUSCAR NA MEMÓRIA</span><input id="note-search" type="search" placeholder="Tema, decisão ou tag…" /></label>
+            <button id="new-note">+ Nova nota</button>
+          </div>
+          <div class="brain-layout">
+            <div class="note-grid" id="note-grid"></div>
+            <form class="note-editor panel" id="note-form" hidden>
+              <div class="panel-head"><div><span>NOVA MEMÓRIA</span><h3>Registrar nota</h3></div><button type="button" id="close-note">×</button></div>
+              <label>Título<input id="note-title" required maxlength="140" /></label>
+              <label>Conteúdo<textarea id="note-body" required maxlength="12000" rows="12"></textarea></label>
+              <label>Tags<input id="note-tags" placeholder="estratégia, fonte, decisão" /></label>
+              <button class="primary-action" type="submit">Salvar na memória</button>
+              <p class="form-error" id="note-error" role="alert"></p>
+            </form>
+          </div>
+        </section>
+
+        <section class="view" id="view-agents">
+          <div class="section-intro">
+            <div><span>EQUIPE DIGITAL</span><h2>Agentes com função.<br /><em>Custos sob controle.</em></h2></div>
+            <p>A estrutura está preparada, mas nenhum modelo pago está ativo. Vamos definir provedores, ferramentas, limites e aprovações juntos.</p>
+          </div>
+          <div class="cost-banner"><span>CUSTO DE IA NO MÊS</span><strong>R$ 0,00</strong><p>Nenhuma chamada externa configurada.</p></div>
+          <div class="agent-grid" id="agent-grid"></div>
+          <article class="panel relevance-agent-panel" id="relevance-agent-panel"></article>
+          <article class="panel editor-agent-panel" id="editor-agent-panel"></article>
+          <article class="panel agent-roadmap">
+            <div class="panel-head"><div><span>PRÓXIMA CONFIGURAÇÃO</span><h3>Contrato operacional dos agentes</h3></div><b>HUMAN-IN-THE-LOOP</b></div>
+            <ol>
+              <li><span>01</span><div><b>Escolher provedor</b><p>API com orçamento limitado ou modelo local compatível com a VPS.</p></div></li>
+              <li><span>02</span><div><b>Definir permissões</b><p>Quais fontes cada agente lê e quais ações podem executar.</p></div></li>
+              <li><span>03</span><div><b>Criar aprovação</b><p>Nada é publicado sem revisão humana explícita.</p></div></li>
+            </ol>
+          </article>
+        </section>
+
+        <section class="view" id="view-audit">
+          <div class="section-intro">
+            <div><span>LOG OPERACIONAL</span><h2>Cada execução.<br /><em>Do início ao fim.</em></h2></div>
+            <p>Histórico persistente com gatilho, duração, resultado e etapas. O painel mostra o que aconteceu; não esconde falhas.</p>
+          </div>
+          <div class="audit-table-wrap panel">
+            <table>
+              <thead><tr><th>Fluxo</th><th>Início</th><th>Gatilho</th><th>Status</th><th>Duração</th><th>Resumo</th></tr></thead>
+              <tbody id="audit-table"></tbody>
+            </table>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  </body>
+</html>
