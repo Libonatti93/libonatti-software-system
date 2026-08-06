@@ -922,7 +922,8 @@ function dashboardPayload() {
 }
 
 async function serveStatic(req, res, pathname) {
-  const requestPath = pathname === "/" ? "index.html" : pathname.replace(/^\/+/, "");
+  const cleanPath = pathname.replace(/^\/+/, "");
+  const requestPath = pathname === "/" ? "index.html" : (path.extname(cleanPath) ? cleanPath : path.join(cleanPath, "index.html"));
   const filePath = path.resolve(PUBLIC_DIR, requestPath);
   if (!filePath.startsWith(`${PUBLIC_DIR}${path.sep}`) && filePath !== path.join(PUBLIC_DIR, "index.html")) {
     res.writeHead(403);
