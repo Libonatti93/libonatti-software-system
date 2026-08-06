@@ -938,7 +938,9 @@ async function serveStatic(req, res, pathname) {
       ".html": "text/html; charset=utf-8",
       ".css": "text/css; charset=utf-8",
       ".js": "text/javascript; charset=utf-8",
-      ".svg": "image/svg+xml"
+      ".svg": "image/svg+xml",
+      ".png": "image/png",
+      ".webp": "image/webp"
     };
     res.writeHead(200, {
       "Content-Type": types[extension] || "application/octet-stream",
