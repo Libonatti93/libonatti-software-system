@@ -1,0 +1,15 @@
+{
+  "name": "matheus-libonatti-lios-v2",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Painel privado e orquestrador LIOS v2 de Matheus Libonatti.",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "check": "node --check server.js && node --check public/app.js && node --check public/presentations.js",
+    "password": "node scripts/hash-password.js"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}
